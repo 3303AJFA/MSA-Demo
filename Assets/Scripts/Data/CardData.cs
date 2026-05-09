@@ -3,23 +3,24 @@ using UnityEngine.InputSystem;
 
 public enum CardEffect
 {
-    Damage,      // E↓ — урон
-    Amplify,     // A — следующая карта x2
-    Shield,      // D — щит
-    Bleed,       // G — кровотечение
-    Stun,        // G — стан
-    Knockback,   // B — откидывает врага
-    Echo         // E↑ — повторяет последний эффект
+    Damage,
+    Amplify,
+    Shield,
+    Bleed,
+    Stun,
+    Knockback,
+    Echo
 }
 
 [CreateAssetMenu(fileName = "NewCard", menuName = "MSA/Card")]
 public class CardData : ScriptableObject
 {
     public string cardName;
-    public int voltageCost = 1;
+    [Range(0f, 100f)]
+    public float voltageCost = 20f;  // в процентах
     public int damage = 0;
     public CardEffect effect;
-    public float effectValue = 0f;  // универсальное значение эффекта
-    public float effectDuration = 0f; // длительность дебаффа
+    public float effectValue = 0f;
+    public float effectDuration = 0f;
     public Key hotkey;
 }

@@ -4,13 +4,16 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
 
-    public int maxVoltage = 3;
-    public float currentVoltage = 3;
-    public float voltageRegenRate = 1f;
+    [Header("Voltage (in %)")]
+    public float maxVoltage = 100f;
+    public float currentVoltage = 100f;
+    public float voltageRegenRate = 15f; // % в секунду
+
+    [Header("HP")]
     public int playerHP = 100;
     public int enemyHP = 100;
 
-    private CardData lastUsedCard; // для Echo
+    private CardData lastUsedCard;
 
     void Awake() => Instance = this;
 
@@ -23,11 +26,17 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public bool TrySpendVoltage(int amount)
+    public bool TrySpendVoltage(float amount)
     {
         if (currentVoltage < amount) return false;
         currentVoltage -= amount;
         return true;
+    }
+
+    public void AddVoltageBonus(float amount)
+    {
+        currentVoltage = Mathf.Min(currentVoltage + amount, maxVoltage);
+        Debug.Log($"+{amount}% Voltage bonus!");
     }
 
     public void ExecuteCard(CardData card)
@@ -41,40 +50,33 @@ public class BattleManager : MonoBehaviour
                 int dmg = Mathf.RoundToInt(card.damage * amplify);
                 DamageEnemy(dmg);
                 break;
-
             case CardEffect.Amplify:
                 status.ApplyAmplify();
                 break;
-
             case CardEffect.Shield:
                 status.ApplyShield((int)card.effectValue);
                 break;
-
             case CardEffect.Bleed:
                 status.ApplyBleed(card.effectValue, card.effectDuration);
                 break;
-
             case CardEffect.Stun:
                 status.ApplyStun(card.effectDuration);
                 break;
-
             case CardEffect.Knockback:
-                Debug.Log("KNOCKBACK! Enemy pushed away");
-                // Анимацию добавим позже
+                Debug.Log("KNOCKBACK!");
                 break;
-
             case CardEffect.Echo:
                 if (lastUsedCard != null && lastUsedCard.effect != CardEffect.Echo)
                 {
-                    Debug.Log($"ECHO: repeating {lastUsedCard.cardName}");
+                    Debug.Log($"ECHO: {lastUsedCard.cardName}");
                     ExecuteCard(lastUsedCard);
-                    return; // не перезаписывать lastUsedCard
+                    return;
                 }
                 break;
         }
 
         lastUsedCard = card;
-        Debug.Log($"Executed: {card.cardName} | Effect: {card.effect}");
+        Debug.Log($"Executed: {card.cardName}");
     }
 
     public void DamageEnemy(int damage)
@@ -82,9 +84,7 @@ public class BattleManager : MonoBehaviour
         enemyHP -= damage;
         enemyHP = Mathf.Max(0, enemyHP);
         Debug.Log($"Enemy HP: {enemyHP}");
-
-        if (enemyHP <= 0)
-            Debug.Log("ENEMY DEFEATED!");
+        if (enemyHP <= 0) Debug.Log("ENEMY DEFEATED!");
     }
 
     public void DamagePlayer(int damage)

@@ -12,7 +12,7 @@ public class BattleHUD : MonoBehaviour
         var bm = BattleManager.Instance;
         if (bm == null) return;
 
-        voltageText.text = $"Voltage: {Mathf.FloorToInt(bm.currentVoltage)}/{bm.maxVoltage}";
+        voltageText.text = $"Voltage: {Mathf.FloorToInt(bm.currentVoltage)}%";
         enemyHPSlider.value = bm.enemyHP;
     }
 }

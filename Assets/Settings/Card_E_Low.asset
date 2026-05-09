@@ -15,4 +15,7 @@ MonoBehaviour:
   cardName: "E\u2193"
   voltageCost: 1
   damage: 10
-  hotkey: 15
+  effect: 0
+  effectValue: 0
+  effectDuration: 0
+  hotkey: 31

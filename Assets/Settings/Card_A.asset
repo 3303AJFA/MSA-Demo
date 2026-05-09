@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f623f08a100e80442be7f5baa1e2b7e8, type: 3}
   m_Name: Card_A
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: 
+  cardName: A
   voltageCost: 1
-  damage: 10
-  hotkey: 0
+  damage: 0
+  effect: 1
+  effectValue: 0
+  effectDuration: 0
+  hotkey: 37

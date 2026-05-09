@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,30 +6,36 @@ public class ComboSystem : MonoBehaviour
 {
     public static ComboSystem Instance;
 
+    [Header("Combo Window")]
+    public float comboWindow = 0.6f; // сколько ждать следующую ноту
+
     private List<CardData> queuedCards = new List<CardData>();
-    private HashSet<CardData> heldCards = new HashSet<CardData>();
+    private Coroutine comboTimer;
 
     void Awake() => Instance = this;
 
     public void OnCardPressed(CardData card)
     {
-        if (heldCards.Contains(card)) return;
-        heldCards.Add(card);
         queuedCards.Add(card);
         AudioSystem.Instance?.PlayPick();
+        Debug.Log($"Queued: {card.cardName} (in combo: {queuedCards.Count})");
+
+        // Сбрасываем таймер
+        if (comboTimer != null) StopCoroutine(comboTimer);
+        comboTimer = StartCoroutine(ComboWindowTimer());
     }
 
-    public void OnCardReleased(CardData card)
+    private IEnumerator ComboWindowTimer()
     {
-        if (!heldCards.Contains(card)) return;
-        heldCards.Remove(card);
-        if (heldCards.Count == 0)
-            FireCombo();
+        yield return new WaitForSeconds(comboWindow);
+        FireCombo();
     }
 
     void FireCombo()
     {
-        int totalCost = 0;
+        if (queuedCards.Count == 0) return;
+
+        float totalCost = 0f;
         foreach (var card in queuedCards)
             totalCost += card.voltageCost;
 
@@ -44,6 +51,7 @@ public class ComboSystem : MonoBehaviour
         foreach (var card in queuedCards)
             BattleManager.Instance.ExecuteCard(card);
 
+        Debug.Log($"=== Combo fired with {queuedCards.Count} cards ===");
         queuedCards.Clear();
     }
 }
