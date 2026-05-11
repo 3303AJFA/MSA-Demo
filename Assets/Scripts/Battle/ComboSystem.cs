@@ -7,7 +7,8 @@ public class ComboSystem : MonoBehaviour
     public static ComboSystem Instance;
 
     [Header("Combo Window")]
-    public float comboWindow = 0.6f; // сколько ждать следующую ноту
+    public float comboWindow = 0.6f;
+    public int maxComboSize = 6;
 
     private List<CardData> queuedCards = new List<CardData>();
     private Coroutine comboTimer;
@@ -16,11 +17,17 @@ public class ComboSystem : MonoBehaviour
 
     public void OnCardPressed(CardData card)
     {
+        if (queuedCards.Count >= maxComboSize)
+        {
+            Debug.Log("Combo limit reached!");
+            return;
+        }
+
         queuedCards.Add(card);
         AudioSystem.Instance?.PlayPick();
-        Debug.Log($"Queued: {card.cardName} (in combo: {queuedCards.Count})");
+        ComboWindowUI.Instance?.AddCard(card);
+        Debug.Log($"Queued: {card.cardName}");
 
-        // Сбрасываем таймер
         if (comboTimer != null) StopCoroutine(comboTimer);
         comboTimer = StartCoroutine(ComboWindowTimer());
     }
@@ -43,6 +50,7 @@ public class ComboSystem : MonoBehaviour
         {
             Debug.Log("Not enough Voltage!");
             queuedCards.Clear();
+            ComboWindowUI.Instance?.ClearSlots();
             return;
         }
 
@@ -51,7 +59,8 @@ public class ComboSystem : MonoBehaviour
         foreach (var card in queuedCards)
             BattleManager.Instance.ExecuteCard(card);
 
-        Debug.Log($"=== Combo fired with {queuedCards.Count} cards ===");
+        Debug.Log($"=== Combo fired ===");
         queuedCards.Clear();
+        ComboWindowUI.Instance?.ClearSlots();
     }
 }

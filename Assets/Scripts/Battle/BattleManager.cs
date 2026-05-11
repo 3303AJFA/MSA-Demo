@@ -79,13 +79,32 @@ public class BattleManager : MonoBehaviour
         Debug.Log($"Executed: {card.cardName}");
     }
 
-    public void DamageEnemy(int damage)
+[Header("Battle State")]
+public bool battleEnded = false;
+
+public void DamageEnemy(int damage)
+{
+    if (battleEnded) return;
+
+    enemyHP -= damage;
+    enemyHP = Mathf.Max(0, enemyHP);
+    Debug.Log($"Enemy HP: {enemyHP}");
+
+    if (enemyHP <= 0)
     {
-        enemyHP -= damage;
-        enemyHP = Mathf.Max(0, enemyHP);
-        Debug.Log($"Enemy HP: {enemyHP}");
-        if (enemyHP <= 0) Debug.Log("ENEMY DEFEATED!");
+        Victory();
     }
+}
+
+void Victory()
+{
+    battleEnded = true;
+    Debug.Log("=== VICTORY! ===");
+
+    // Показываем экран победы
+    if (BattleEndUI.Instance != null)
+        BattleEndUI.Instance.ShowVictory();
+}
 
     public void DamagePlayer(int damage)
     {
