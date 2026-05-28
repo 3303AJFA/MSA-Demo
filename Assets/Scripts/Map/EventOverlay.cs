@@ -41,16 +41,29 @@ public class EventOverlay : MonoBehaviour
         if (eventDatabase == null)
         {
             Debug.LogWarning("EventDatabase is not assigned!");
+            FallbackToCombat(poiID);
             return;
         }
 
         var ev = eventDatabase.GetRandomFor(currentAct);
         if (ev == null)
         {
-            Debug.LogWarning("No events for this act!");
+            Debug.Log("No unused events left — falling back to combat.");
+            FallbackToCombat(poiID);
             return;
         }
         OpenEvent(ev);
+    }
+
+    void FallbackToCombat(int poiID)
+    {
+        if (MapManager.Instance != null)
+            MapManager.Instance.SaveToGameState();
+
+        if (SceneFlow.Instance != null)
+            SceneFlow.Instance.GoToBattle(poiID);
+        else
+            Debug.LogWarning("SceneFlow not found!");
     }
 
     public void OpenMerchant(int poiID)
@@ -65,6 +78,9 @@ public class EventOverlay : MonoBehaviour
 
     public void OpenEvent(EventData data)
     {
+        if (GameState.Instance != null)
+            GameState.Instance.MarkEventUsed(data.eventID);
+
         ClearChoices();
         outcomePanel.SetActive(false);
 
@@ -101,6 +117,7 @@ public class EventOverlay : MonoBehaviour
         descriptionText.gameObject.SetActive(false);
         outcomePanel.SetActive(true);
         outcomeText.text = choice.outcomeText;
+
         if (choice.outcomeImage != null)
         {
             outcomeImage.sprite = choice.outcomeImage;

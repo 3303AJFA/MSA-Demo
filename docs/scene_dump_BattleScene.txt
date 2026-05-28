@@ -1,0 +1,1130 @@
+Scene: BattleScene | 2026-05-28 19:52
+--------------------------------------------------
+Main Camera
+  [Camera]
+    Clear Flags = Skybox
+    Back Ground Color = #314D7900
+    Projection Matrix Mode = 1
+    Iso = 200
+    Near clip plane = 0.30
+    Far clip plane = 1000.00
+    Field of view = 60.00
+    Orthographic = False
+    Orthographic size = 5.00
+    Depth = -1.00
+    Rendering Path = Use Graphics Settings
+    Target Texture = <none>
+    Target Display = 0
+    Target Eye = 3
+    HDR = True
+    Allow MSAA = True
+    Allow Dynamic Resolution = False
+    Force Into RT = False
+    Occlusion Culling = True
+    Stereo Convergence = 10.00
+    Stereo Separation = 0.02
+  [AudioListener]
+  [UniversalAdditionalCameraData]
+    Render Shadows = True
+    Requires Depth Texture Option = Use settings from Render Pipeline Asset
+    Requires Opaque Texture Option = Use settings from Render Pipeline Asset
+    Camera Type = Base
+    Renderer Index = -1
+    Volume Trigger = <none>
+    Volume Framework Update Mode Option = Use Pipeline Settings
+    Render Post Processing = True
+    Antialiasing = No Anti-aliasing
+    Antialiasing Quality = High
+    Stop Na N = False
+    Dithering = False
+    Clear Depth = True
+    Allow XR Rendering = True
+    Allow HDR Output = True
+    Use Screen Coord Override = False
+  [CameraController]
+    Distance = 15.00
+    Min Distance = 5.00
+    Max Distance = 20.00
+    Zoom Speed = 50.00
+    Orbit Speed = 150.00
+    Vertical Angle = 35.00
+    Inertia Decay = 5.00
+    Inertia Threshold = 0.01
+Directional Light
+  [T] pos=(0.0,3.0,0.0) rot=(50,330,0) scale=(1.0,1.0,1.0)
+  [Light]
+    Type = Directional
+    Color = #FFFFFFFF
+    Intensity = 2.00
+    Range = 10.00
+    Spot Angle = 30.00
+    Inner Spot Angle = 21.80
+    Render Mode = Auto
+    Lightmapping = Realtime
+    Light Shadow Caster Mode = 0
+    Color Temperature = 2274.00
+    Use Color Temperature = True
+    Use Bounding Sphere Override = False
+    Use View Frustum For Shadow Caster Cull = True
+    Force Visible = False
+    Shape Radius = 0.00
+    Light Unit = 1
+  [UniversalAdditionalLightData]
+    Use Pipeline Settings = True
+    Additional Lights Shadow Resolution Tier = 2
+    Custom Shadow Layers = False
+    Soft Shadow Quality = Low
+    Light Layer Mask = Light Layer Default
+    Shadow Layer Mask = Light Layer Default
+    Rendering Layers = 1
+    Shadow Rendering Layers = 1
+Global Volume
+  [Volume]
+    Is Global = True
+    Priority = 0.00
+    Blend Distance = 0.00
+    Weight = 1.00
+    Shared Profile = AliceVolumeProfile (VolumeProfile)
+BattleManager
+  [BattleManager]
+    Max Voltage = 100.00
+    Current Voltage = 100.00
+    Voltage Regen Rate = 10.00
+    Player HP = 100
+    Enemy HP = 1000
+    Battle Ended = False
+  [ComboSystem]
+    Max Combo Size = 6
+    Input Cooldown Beats = 0.50
+    Perfect Window = 0.15
+    Good Window = 0.30
+    Perfect Bonus = 1.50
+    Good Bonus = 1.25
+  [AudioSystem]
+    Note E_Low = E_Low (AudioClip)
+    Note A = A (AudioClip)
+    Note D = D (AudioClip)
+    Note G = G (AudioClip)
+    Note B = B (AudioClip)
+    Note E_High = E_High (AudioClip)
+    Pick Sound = Pick (AudioClip)
+    Chord Humanize Offset = 0.01
+  [StatusEffect]
+    Is Stunned = False
+    Is Bleeding = False
+    Bleed Damage = 5.00
+    Bleed Interval = 0.50
+    Is Amplified = False
+    Amplify Multiplier = 2.00
+    Shield HP = 0
+  [BeatManager]
+    Bpm = 120.00
+  [EnemyAttack]
+    Attack Every Beats = 4
+    Damage Per Attack = 8
+    Warmup Beats = 2
+Canvas
+  [RT] pos=(734,422) size=(1899x1092) anchor=(0.0,0.0)-(0.0,0.0) scale=(0.8,0.8,0.8)
+  [Canvas]
+    Render Mode = Screen Space - Overlay
+    Camera = <none>
+    Plane Distance = 100.00
+    Pixel Perfect = False
+    Receives Events = True
+    Override Sorting = False
+    Override Pixel Perfect = False
+    Sorting Bucket Normalized Size = 0.00
+    Vertex Color Always Gamma Space = False
+    Use Reflection Probes = False
+    Additional Shader Channels Flag = (25)
+    Update Rect Transform For Standalone = Enabled
+  [CanvasScaler]
+    Ui Scale Mode = Scale With Screen Size
+    Reference Pixels Per Unit = 100.00
+    Scale Factor = 1.00
+    Screen Match Mode = Match Width Or Height
+    Match Width Or Height = 0.50
+    Physical Unit = Points
+    Fallback Screen DPI = 96.00
+    Default Sprite DPI = 96.00
+    Dynamic Pixels Per Unit = 1.00
+    Preset Info Is World = False
+  [GraphicRaycaster]
+    Ignore Reversed Graphics = True
+    Blocking Objects = None
+  [RhythmFeedback]
+    Rhythm Text = RhythmText (TextMeshProUGUI)
+    Display Duration = 0.80
+  TopHUD
+    [RT] pos=(0,0) size=(0x200) anchor=(0.0,1.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+    [HUDController]
+      Player HP Text = <none>
+      Player Max HP = 100
+      Player Drain Reversed = False
+      Enemy HP Text = <none>
+      Enemy Max HP = 100
+      Enemy Drain Reversed = True
+      Sprite Active = segment_active (Sprite)
+      Sprite Empty = segment_empty (Sprite)
+      Sprite Damaged = segment_damaged (Sprite)
+      Enemy Sprite Active = <none>
+      Enemy Sprite Empty = <none>
+      Enemy Sprite Damaged = <none>
+    PlayerHUD
+      [RT] pos=(40,-20) size=(700x200) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+      HeroPortrait
+        [RT] pos=(60,-190) size=(80x80) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+        [Image]
+          Color = #FFFFFFFF
+          Sprite = portrait_frame (Sprite)
+          Type = Simple
+      PlayerHPBar
+        [RT] pos=(150,-190) size=(500x60) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+        [HorizontalLayoutGroup]
+          Child Alignment = Upper Left
+          Spacing = 2.00
+          Child Force Expand Width = False
+          Child Force Expand Height = False
+          Child Control Width = False
+          Child Control Height = False
+          Child Scale Width = False
+          Child Scale Height = False
+          Reverse Arrangement = False
+        Segment_01
+          [RT] pos=(15,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_02
+          [RT] pos=(47,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_03
+          [RT] pos=(79,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_04
+          [RT] pos=(111,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_05
+          [RT] pos=(143,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_06
+          [RT] pos=(175,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_07
+          [RT] pos=(207,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_08
+          [RT] pos=(239,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_09
+          [RT] pos=(271,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_10
+          [RT] pos=(303,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+    EnemyHUD
+      [RT] pos=(-20,-10) size=(700x200) anchor=(1.0,1.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+      EnemyPortrait
+        [RT] pos=(-80,-20) size=(80x80) anchor=(1.0,1.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+        [Image]
+          Color = #FFFFFFFF
+          Sprite = portrait_frame (Sprite)
+          Type = Simple
+      EnemyHPBar
+        [RT] pos=(-400,-20) size=(500x40) anchor=(1.0,1.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+        [HorizontalLayoutGroup]
+          Child Alignment = Upper Left
+          Spacing = 2.00
+          Child Force Expand Width = False
+          Child Force Expand Height = False
+          Child Control Width = False
+          Child Control Height = False
+          Child Scale Width = False
+          Child Scale Height = False
+          Reverse Arrangement = False
+        Segment_10
+          [RT] pos=(15,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_09
+          [RT] pos=(47,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_08
+          [RT] pos=(79,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_07
+          [RT] pos=(111,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_06
+          [RT] pos=(143,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_05
+          [RT] pos=(175,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_04
+          [RT] pos=(207,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_03
+          [RT] pos=(239,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_02
+          [RT] pos=(271,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+        Segment_01
+          [RT] pos=(303,-18) size=(30x35) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+          [Image]
+            Color = #FFFFFFFF
+            Sprite = segment_active (Sprite)
+            Type = Simple
+  BPM_Line
+    [RT] pos=(0,-80) size=(600x40) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+    [BPMVisualizer]
+      Left Spawn = LeftSpawn (RectTransform)
+      Right Spawn = RightSpawn (RectTransform)
+      Center Point = CenterPoint (RectTransform)
+      Circle Prefab = BeatCircle (GameObject)
+      Beat Strong = Beat_Strong (AudioClip)
+      Beat Weak = Beat_Weak (AudioClip)
+    Line_BG
+      [RT] pos=(-11,0) size=(19x6) anchor=(0.0,0.5)-(1.0,0.5) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #FFFFFFFF
+        Sprite = bpm_line (Sprite)
+        Type = Simple
+    LeftSpawn
+      [RT] pos=(0,0) size=(100x100) anchor=(0.0,0.5)-(0.0,0.5) scale=(1.0,1.0,1.0)
+    RightSpawn
+      [RT] pos=(0,0) size=(100x100) anchor=(1.0,0.5)-(1.0,0.5) scale=(1.0,1.0,1.0)
+    CenterPoint
+      [RT] pos=(0,0) size=(100x100) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+      Image
+        [RT] pos=(0,0) size=(18x90) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+        [Image]
+          Color = #FFFFFFFF
+          Sprite = bpm_center (Sprite)
+          Type = Simple
+  CardPanel
+    [RT] pos=(0,30) size=(1100x220) anchor=(0.5,0.0)-(0.5,0.0) scale=(1.0,1.0,1.0)
+    [Image]
+      Color = #FFFFFF00
+      Sprite = Background (Sprite)
+      Type = Sliced
+    Btn_E_Low
+      [RT] pos=(85,-100) size=(170x200) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #FFFFFFFF
+        Sprite = card_normal (Sprite)
+        Type = Simple
+      [Button]
+        Transition = Color Tint
+        Interactable = True
+        Target Graphic = Btn_E_Low (Image)
+      [CardButton]
+        Card = Card_E_Low (CardData)
+        String Visual = Btn_E_Low (StringVisual)
+        Normal Sprite = card_normal (Sprite)
+        Armed Sprite = card_armed (Sprite)
+        Label Key = LabelKey (TextMeshProUGUI)
+        Label Role = LabelRole (TextMeshProUGUI)
+        Label Cost = LabelCost (TextMeshProUGUI)
+        String Line = StringLine (Image)
+        Glow Object = Glow (GameObject)
+        Armed Lift Y = 22.00
+        Normal Key Color = #DED1BAFF
+        Armed Key Color = #E6ED85FF
+        Normal Role Color = #8F8A78FF
+        Armed Role Color = #BDC44AFF
+        Normal String Color = #C9A34AFF
+        Armed String Color = #E6ED85FF
+        Cost Color = #C9A34AFF
+      [StringVisual]
+        String Line = StringLine (RectTransform)
+        String Image = StringLine (Image)
+        Shake Duration = 0.35
+        Shake Strength = 5.00
+        Shake Vibrato = 25
+        Normal Color = #FFFFFFFF
+        Flash Color = #FFD933FF
+        Flash In Duration = 0.05
+        Flash Out Duration = 0.40
+      LabelKey
+        [RT] pos=(0,-40) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "Q"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 36.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelCost
+        [RT] pos=(60,-20) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "II"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 18.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelRole
+        [RT] pos=(0,-180) size=(80x24) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "DAMAGE"
+          Font Color 32 = #8F8A78FF
+          Font Color = #8F8A78FF
+          Font Size = 16.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      StringLine
+        [RT] pos=(0,0) size=(100x4) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+        [Image]
+          Color = #C9A24BFF
+          Sprite = card_string (Sprite)
+          Type = Simple
+      Glow
+        [RT] pos=(0,0) size=(190x220) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+        [Image]
+          Color = #BCC54A28
+          Sprite = card_armed (Sprite)
+          Type = Simple
+    Btn_A
+      [RT] pos=(271,-100) size=(170x200) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #FFFFFFFF
+        Sprite = card_normal (Sprite)
+        Type = Simple
+      [Button]
+        Transition = Color Tint
+        Interactable = True
+        Target Graphic = Btn_A (Image)
+      [CardButton]
+        Card = Card_A (CardData)
+        String Visual = Btn_A (StringVisual)
+        Normal Sprite = card_normal (Sprite)
+        Armed Sprite = card_armed (Sprite)
+        Label Key = LabelKey (TextMeshProUGUI)
+        Label Role = LabelRole (TextMeshProUGUI)
+        Label Cost = LabelCost (TextMeshProUGUI)
+        String Line = StringLine (Image)
+        Glow Object = <none>
+        Armed Lift Y = 22.00
+        Normal Key Color = #DED1BAFF
+        Armed Key Color = #E6ED85FF
+        Normal Role Color = #8F8A78FF
+        Armed Role Color = #BDC44AFF
+        Normal String Color = #C9A34AFF
+        Armed String Color = #E6ED85FF
+        Cost Color = #C9A34AFF
+      [StringVisual]
+        String Line = StringLine (RectTransform)
+        String Image = StringLine (Image)
+        Shake Duration = 0.35
+        Shake Strength = 5.00
+        Shake Vibrato = 25
+        Normal Color = #FFFFFFFF
+        Flash Color = #FFD933FF
+        Flash In Duration = 0.05
+        Flash Out Duration = 0.40
+      LabelKey
+        [RT] pos=(0,-40) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "W"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 36.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelCost
+        [RT] pos=(60,-20) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "II"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 18.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelRole
+        [RT] pos=(0,-180) size=(80x24) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "BUFF"
+          Font Color 32 = #8F8A78FF
+          Font Color = #8F8A78FF
+          Font Size = 16.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      StringLine
+        [RT] pos=(0,0) size=(100x4) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+        [Image]
+          Color = #C9A24BFF
+          Sprite = card_string (Sprite)
+          Type = Simple
+    Btn_D
+      [RT] pos=(456,-100) size=(170x200) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #FFFFFFFF
+        Sprite = card_normal (Sprite)
+        Type = Simple
+      [Button]
+        Transition = Color Tint
+        Interactable = True
+        Target Graphic = Btn_D (Image)
+      [CardButton]
+        Card = Card_D (CardData)
+        String Visual = Btn_D (StringVisual)
+        Normal Sprite = card_normal (Sprite)
+        Armed Sprite = card_armed (Sprite)
+        Label Key = LabelKey (TextMeshProUGUI)
+        Label Role = LabelRole (TextMeshProUGUI)
+        Label Cost = LabelCost (TextMeshProUGUI)
+        String Line = StringLine (Image)
+        Glow Object = <none>
+        Armed Lift Y = 22.00
+        Normal Key Color = #DED1BAFF
+        Armed Key Color = #E6ED85FF
+        Normal Role Color = #8F8A78FF
+        Armed Role Color = #BDC44AFF
+        Normal String Color = #C9A34AFF
+        Armed String Color = #E6ED85FF
+        Cost Color = #C9A34AFF
+      [StringVisual]
+        String Line = StringLine (RectTransform)
+        String Image = StringLine (Image)
+        Shake Duration = 0.35
+        Shake Strength = 5.00
+        Shake Vibrato = 25
+        Normal Color = #FFFFFFFF
+        Flash Color = #FFD933FF
+        Flash In Duration = 0.05
+        Flash Out Duration = 0.40
+      LabelKey
+        [RT] pos=(0,-40) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "E"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 36.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelCost
+        [RT] pos=(60,-20) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "II"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 18.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelRole
+        [RT] pos=(0,-180) size=(80x24) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "SHIELD"
+          Font Color 32 = #8F8A78FF
+          Font Color = #8F8A78FF
+          Font Size = 16.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      StringLine
+        [RT] pos=(0,0) size=(100x4) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+        [Image]
+          Color = #C9A24BFF
+          Sprite = card_string (Sprite)
+          Type = Simple
+    Btn_G
+      [RT] pos=(642,-100) size=(170x200) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #FFFFFFFF
+        Sprite = card_normal (Sprite)
+        Type = Simple
+      [Button]
+        Transition = Color Tint
+        Interactable = True
+        Target Graphic = Btn_G (Image)
+      [CardButton]
+        Card = Card_G (CardData)
+        String Visual = Btn_G (StringVisual)
+        Normal Sprite = card_normal (Sprite)
+        Armed Sprite = card_armed (Sprite)
+        Label Key = LabelKey (TextMeshProUGUI)
+        Label Role = LabelRole (TextMeshProUGUI)
+        Label Cost = LabelCost (TextMeshProUGUI)
+        String Line = StringLine (Image)
+        Glow Object = <none>
+        Armed Lift Y = 22.00
+        Normal Key Color = #DED1BAFF
+        Armed Key Color = #E6ED85FF
+        Normal Role Color = #8F8A78FF
+        Armed Role Color = #BDC44AFF
+        Normal String Color = #C9A34AFF
+        Armed String Color = #E6ED85FF
+        Cost Color = #C9A34AFF
+      [StringVisual]
+        String Line = StringLine (RectTransform)
+        String Image = StringLine (Image)
+        Shake Duration = 0.35
+        Shake Strength = 5.00
+        Shake Vibrato = 25
+        Normal Color = #FFFFFFFF
+        Flash Color = #FFD933FF
+        Flash In Duration = 0.05
+        Flash Out Duration = 0.40
+      LabelKey
+        [RT] pos=(0,-40) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "A"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 36.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelCost
+        [RT] pos=(60,-20) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "II"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 18.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelRole
+        [RT] pos=(0,-180) size=(80x24) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "DEBUFF"
+          Font Color 32 = #8F8A78FF
+          Font Color = #8F8A78FF
+          Font Size = 16.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      StringLine
+        [RT] pos=(0,0) size=(100x4) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+        [Image]
+          Color = #C9A24BFF
+          Sprite = card_string (Sprite)
+          Type = Simple
+    Btn_B
+      [RT] pos=(828,-100) size=(170x200) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #FFFFFFFF
+        Sprite = card_normal (Sprite)
+        Type = Simple
+      [Button]
+        Transition = Color Tint
+        Interactable = True
+        Target Graphic = Btn_B (Image)
+      [CardButton]
+        Card = Card_B (CardData)
+        String Visual = Btn_B (StringVisual)
+        Normal Sprite = card_normal (Sprite)
+        Armed Sprite = card_armed (Sprite)
+        Label Key = LabelKey (TextMeshProUGUI)
+        Label Role = LabelRole (TextMeshProUGUI)
+        Label Cost = LabelCost (TextMeshProUGUI)
+        String Line = StringLine (Image)
+        Glow Object = <none>
+        Armed Lift Y = 22.00
+        Normal Key Color = #DED1BAFF
+        Armed Key Color = #E6ED85FF
+        Normal Role Color = #8F8A78FF
+        Armed Role Color = #BDC44AFF
+        Normal String Color = #C9A34AFF
+        Armed String Color = #E6ED85FF
+        Cost Color = #C9A34AFF
+      [StringVisual]
+        String Line = StringLine (RectTransform)
+        String Image = StringLine (Image)
+        Shake Duration = 0.35
+        Shake Strength = 5.00
+        Shake Vibrato = 25
+        Normal Color = #FFFFFFFF
+        Flash Color = #FFD933FF
+        Flash In Duration = 0.05
+        Flash Out Duration = 0.40
+      LabelKey
+        [RT] pos=(0,-40) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "S"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 36.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelCost
+        [RT] pos=(60,-20) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "II"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 18.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelRole
+        [RT] pos=(0,-180) size=(80x24) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "CONTROL"
+          Font Color 32 = #8F8A78FF
+          Font Color = #8F8A78FF
+          Font Size = 16.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      StringLine
+        [RT] pos=(0,0) size=(100x4) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+        [Image]
+          Color = #C9A24BFF
+          Sprite = card_string (Sprite)
+          Type = Simple
+    Btn_E_High
+      [RT] pos=(1013,-100) size=(170x200) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #FFFFFFFF
+        Sprite = card_normal (Sprite)
+        Type = Simple
+      [Button]
+        Transition = Color Tint
+        Interactable = True
+        Target Graphic = Btn_E_High (Image)
+      [CardButton]
+        Card = Card_E_High (CardData)
+        String Visual = Btn_E_High (StringVisual)
+        Normal Sprite = card_normal (Sprite)
+        Armed Sprite = card_armed (Sprite)
+        Label Key = LabelKey (TextMeshProUGUI)
+        Label Role = LabelRole (TextMeshProUGUI)
+        Label Cost = LabelCost (TextMeshProUGUI)
+        String Line = StringLine (Image)
+        Glow Object = <none>
+        Armed Lift Y = 22.00
+        Normal Key Color = #DED1BAFF
+        Armed Key Color = #E6ED85FF
+        Normal Role Color = #8F8A78FF
+        Armed Role Color = #BDC44AFF
+        Normal String Color = #C9A34AFF
+        Armed String Color = #E6ED85FF
+        Cost Color = #C9A34AFF
+      [StringVisual]
+        String Line = StringLine (RectTransform)
+        String Image = StringLine (Image)
+        Shake Duration = 0.35
+        Shake Strength = 5.00
+        Shake Vibrato = 25
+        Normal Color = #FFFFFFFF
+        Flash Color = #FFD933FF
+        Flash In Duration = 0.05
+        Flash Out Duration = 0.40
+      LabelKey
+        [RT] pos=(0,-40) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "D"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 36.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelCost
+        [RT] pos=(60,-20) size=(60x50) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "II"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 18.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      LabelRole
+        [RT] pos=(0,-180) size=(80x24) anchor=(0.5,1.0)-(0.5,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "SPECIAL"
+          Font Color 32 = #8F8A78FF
+          Font Color = #8F8A78FF
+          Font Size = 16.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Center
+          Vertical Alignment = Middle
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      StringLine
+        [RT] pos=(0,0) size=(100x4) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+        [Image]
+          Color = #C9A24BFF
+          Sprite = card_string (Sprite)
+          Type = Simple
+  VoltageBar
+    [RT] pos=(60,0) size=(80x400) anchor=(0.0,0.5)-(0.0,0.5) scale=(1.0,1.0,1.0)
+    [VoltageBarUI]
+      Fill = VB_Fill (RectTransform)
+      Text = VB_Text (TextMeshProUGUI)
+    VB_Frame
+      [RT] pos=(0,0) size=(20x-300) anchor=(0.0,0.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #3A3A3AFF
+        Sprite = Background (Sprite)
+        Type = Sliced
+    VB_Fill
+      [RT] pos=(0,-190) size=(-10x390) anchor=(0.0,0.0)-(1.0,0.0) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #FFBC00FF
+        Sprite = UISprite (Sprite)
+        Type = Sliced
+    VB_Text
+      [RT] pos=(0,0) size=(80x40) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+      [TextMeshProUGUI]
+        Color = #FFFFFFFF
+        Text = "100%"
+        Font Color 32 = #FFFFFFFF
+        Font Color = #FFFFFFFF
+        Font Size = 28.00
+        Font Weight = Regular
+        Font Style = Bold
+        Horizontal Alignment = Left
+        Vertical Alignment = Top
+        Text Alignment = Converted
+        Character Horizontal Scale = 1.00
+        Parent Linked Component = <none>
+        Check Padding Required = False
+  ComboWindow
+    [RT] pos=(0,-50) size=(400x400) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+    [CanvasGroup]
+      Alpha = 1.00
+      Interactable = True
+      Blocks Raycasts = True
+      Ignore Parent Groups = False
+    [ComboWindowUI]
+      Slots Container = CW_Slots (RectTransform)
+      Slot Prefab = ComboSlot (GameObject)
+      Canvas Group = <none>
+      Inner Ring = InnerRing (RectTransform)
+      Outer Ring = OuterRing (RectTransform)
+      Outer Start Scale = 3.00
+      Outer Ring Image = OuterRing (Image)
+      Charging Color = #FFFFFFFF
+      Perfect Color = #FFFFFFFF
+    CW_Slots
+      [RT] pos=(0,-220) size=(580x80) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+      [HorizontalLayoutGroup]
+        Child Alignment = Middle Center
+        Spacing = 10.00
+        Child Force Expand Width = False
+        Child Force Expand Height = False
+        Child Control Width = False
+        Child Control Height = False
+        Child Scale Width = False
+        Child Scale Height = False
+        Reverse Arrangement = False
+    InnerRing
+      [RT] pos=(0,0) size=(240x240) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #FFFFFFFF
+        Sprite = combo_inner (Sprite)
+        Type = Simple
+    OuterRing
+      [RT] pos=(0,0) size=(156x156) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #FFFFFFFF
+        Sprite = combo_outer (Sprite)
+        Type = Simple
+    RhythmText
+      [RT] pos=(0,342) size=(400x80) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+      [TextMeshProUGUI]
+        Color = #FFFFFFFF
+        Font Color 32 = #FFFFFFFF
+        Font Color = #FFFFFFFF
+        Font Size = 56.00
+        Font Weight = Regular
+        Font Style = Bold
+        Horizontal Alignment = Center
+        Vertical Alignment = Middle
+        Text Alignment = Converted
+        Character Horizontal Scale = 1.00
+        Parent Linked Component = <none>
+        Check Padding Required = False
+  BattleEndPanel
+    [RT] pos=(0,0) size=(-1384x-676) anchor=(0.0,0.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+    [BattleEndUI]
+      Panel Root = BattleEndPanel (GameObject)
+      Title Text = TitleText (TextMeshProUGUI)
+      Reward Text = RewardText (TextMeshProUGUI)
+      Continue Button = ContinueButton (Button)
+    Background
+      [RT] pos=(0,0) size=(0x0) anchor=(0.0,0.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #0000008C
+        Sprite = <none>
+        Type = Simple
+    Content
+      [RT] pos=(0,0) size=(400x300) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+      [VerticalLayoutGroup]
+        Child Alignment = Middle Center
+        Spacing = 20.00
+        Child Force Expand Width = True
+        Child Force Expand Height = False
+        Child Control Width = True
+        Child Control Height = True
+        Child Scale Width = False
+        Child Scale Height = False
+        Reverse Arrangement = False
+      TitleText
+        [RT] pos=(200,-112) size=(400x54) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "Victory"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 48.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Left
+          Vertical Alignment = Top
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      RewardText
+        [RT] pos=(200,-172) size=(400x27) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+        [TextMeshProUGUI]
+          Color = #FFFFFFFF
+          Text = "+25 Memories"
+          Font Color 32 = #FFFFFFFF
+          Font Color = #FFFFFFFF
+          Font Size = 24.00
+          Font Weight = Regular
+          Font Style = Normal
+          Horizontal Alignment = Left
+          Vertical Alignment = Top
+          Text Alignment = Converted
+          Character Horizontal Scale = 1.00
+          Parent Linked Component = <none>
+          Check Padding Required = False
+      ContinueButton
+        [RT] pos=(200,-210) size=(400x10) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+        [Image]
+          Color = #FFFFFFFF
+          Sprite = UISprite (Sprite)
+          Type = Sliced
+        [Button]
+          Transition = Color Tint
+          Interactable = True
+          Target Graphic = ContinueButton (Image)
+        Text (TMP)
+          [RT] pos=(0,0) size=(0x0) anchor=(0.0,0.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+          [TextMeshProUGUI]
+            Color = #FFFFFFFF
+            Text = "Continue"
+            Font Color 32 = #323232FF
+            Font Color = #323232FF
+            Font Size = 24.00
+            Font Weight = Regular
+            Font Style = Normal
+            Horizontal Alignment = Center
+            Vertical Alignment = Middle
+            Text Alignment = Converted
+            Character Horizontal Scale = 1.00
+            Parent Linked Component = <none>
+            Check Padding Required = False
+  EnemyDamageSpawn
+    [RT] pos=(-200,-150) size=(0x0) anchor=(1.0,1.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+  PlayerDamageSpawn
+    [RT] pos=(200,-150) size=(0x0) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+  DamageNumberSpawner
+    [RT] pos=(0,0) size=(100x100) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+    [DamageNumberSpawner]
+      Prefab = DamageNumbers (DamageNumber)
+      Enemy Spawn Point = EnemyDamageSpawn (RectTransform)
+      Player Spawn Point = PlayerDamageSpawn (RectTransform)
+      Normal Color = #FFFFFFFF
+      Perfect Color = #FFD933FF
+      Good Color = #B2E6FFFF
+      Player Damage Color = #FF4C4CFF
+EventSystem
+  [EventSystem]
+    First Selected = <none>
+    Send Navigation Events = True
+    Drag Threshold = 10
+  [InputSystemUIInputModule]
+    Send Pointer Hover To Parent = True
+    Move Repeat Delay = 0.50
+    Move Repeat Rate = 0.10
+    XR Tracking Origin = <none>
+    Deselect On Background Click = True
+    Pointer Behavior = Single Mouse Or Pen But Multi Touch And Track
+    Scroll Delta Per Tick = 6.00
+Ground
+  [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(10.0,1.0,10.0)
+Player
+  [T] pos=(-4.0,1.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+Enemy
+  [T] pos=(4.0,1.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+SceneFlow
+  [SceneFlow]

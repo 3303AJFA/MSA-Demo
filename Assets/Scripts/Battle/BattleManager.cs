@@ -13,6 +13,11 @@ public class BattleManager : MonoBehaviour
     public int playerHP = 100;
     public int enemyHP = 100;
 
+    [Header("Battle State")]
+    public bool battleEnded = false;
+
+    [HideInInspector] public float lastRhythmBonus = 1.0f;
+
     private CardData lastUsedCard;
 
     void Awake() => Instance = this;
@@ -47,7 +52,7 @@ public class BattleManager : MonoBehaviour
         switch (card.effect)
         {
             case CardEffect.Damage:
-                int dmg = Mathf.RoundToInt(card.damage * amplify);
+                int dmg = Mathf.RoundToInt(card.damage * amplify * lastRhythmBonus);
                 DamageEnemy(dmg);
                 break;
             case CardEffect.Amplify:
@@ -79,38 +84,53 @@ public class BattleManager : MonoBehaviour
         Debug.Log($"Executed: {card.cardName}");
     }
 
-[Header("Battle State")]
-public bool battleEnded = false;
-
-public void DamageEnemy(int damage)
-{
-    if (battleEnded) return;
-
-    enemyHP -= damage;
-    enemyHP = Mathf.Max(0, enemyHP);
-    Debug.Log($"Enemy HP: {enemyHP}");
-
-    if (enemyHP <= 0)
+    public void DamageEnemy(int damage)
     {
-        Victory();
+        if (battleEnded) return;
+
+        enemyHP -= damage;
+        enemyHP = Mathf.Max(0, enemyHP);
+        Debug.Log($"Enemy HP: {enemyHP}");
+
+        DamageNumberSpawner.Instance?.ShowEnemyDamage(damage, lastRhythmBonus);
+
+        if (enemyHP <= 0)
+        {
+            Victory();
+        }
     }
-}
 
-void Victory()
-{
-    battleEnded = true;
-    Debug.Log("=== VICTORY! ===");
+    void Victory()
+    {
+        battleEnded = true;
+        Debug.Log("=== VICTORY! ===");
 
-    // Показываем экран победы
-    if (BattleEndUI.Instance != null)
-        BattleEndUI.Instance.ShowVictory();
-}
+        if (BattleEndUI.Instance != null)
+            BattleEndUI.Instance.ShowVictory();
+    }
 
     public void DamagePlayer(int damage)
     {
+        if (battleEnded) return;
+
         int finalDamage = StatusEffect.Instance.AbsorbDamage(damage);
         playerHP -= finalDamage;
         playerHP = Mathf.Max(0, playerHP);
         Debug.Log($"Player HP: {playerHP}");
+
+        if (finalDamage > 0)
+            DamageNumberSpawner.Instance?.ShowPlayerDamage(finalDamage);
+
+        if (playerHP <= 0)
+            Defeat();
+    }
+
+    void Defeat()
+    {
+        battleEnded = true;
+        Debug.Log("=== DEFEAT ===");
+
+        if (SceneFlow.Instance != null)
+            SceneFlow.Instance.ReturnToMap();
     }
 }

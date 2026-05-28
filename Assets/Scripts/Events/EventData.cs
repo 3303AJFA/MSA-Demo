@@ -13,6 +13,7 @@ public enum EventAct
 public class EventData : ScriptableObject
 {
     [Header("Identity")]
+    public string eventID;
     public string eventTitle;
     public EventAct availableInAct = EventAct.AnyAct;
 

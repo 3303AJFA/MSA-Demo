@@ -2,21 +2,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class ComboWindowUI : MonoBehaviour
 {
     public static ComboWindowUI Instance;
 
-    [Header("References")]
-    public Transform slotsContainer;   // CW_Slots
-    public Image timerBar;             // CW_Timer
-    public GameObject slotPrefab;      // ComboSlot
-    public CanvasGroup canvasGroup;    // на ComboWindow
+    [Header("Card Slots")]
+    public Transform slotsContainer;
+    public GameObject slotPrefab;
+    public CanvasGroup canvasGroup;
+
+    [Header("Beat Rings")]
+    public RectTransform innerRing;
+    public RectTransform outerRing;
+    public float outerStartScale = 3f;
+
+    [Header("Ring Colors")]
+    public Image outerRingImage;
+    public Color chargingColor = Color.white;
+    public Color perfectColor = new Color(1f, 0.85f, 0.2f, 1f);
 
     private List<GameObject> activeSlots = new List<GameObject>();
-    private float timerStart;
-    private float timerDuration;
-    private bool timerActive = false;
+    private bool flashedThisPulse;
 
     void Awake() => Instance = this;
 
@@ -24,18 +32,46 @@ public class ComboWindowUI : MonoBehaviour
     {
         if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = 0f;
+
+        if (outerRing != null)
+            outerRing.localScale = Vector3.one * outerStartScale;
     }
 
     void Update()
     {
-        if (timerActive)
+        bool charging = ComboSystem.Instance != null && ComboSystem.Instance.IsCharging;
+
+        if (charging)
         {
-            float elapsed = Time.time - timerStart;
-            float t = 1f - Mathf.Clamp01(elapsed / timerDuration);
-            timerBar.fillAmount = t;
+            float progress = ComboSystem.Instance.RingProgress;
+
+            if (progress < 0.1f && flashedThisPulse)
+            {
+                flashedThisPulse = false;
+                if (outerRingImage != null)
+                    outerRingImage.color = chargingColor;
+            }
+
+            float scale = Mathf.Lerp(outerStartScale, 1f, progress);
+            if (outerRing != null)
+                outerRing.localScale = Vector3.one * scale;
+
+            if (progress >= 0.9f && !flashedThisPulse)
+            {
+                flashedThisPulse = true;
+                if (outerRingImage != null)
+                    outerRingImage.color = perfectColor;
+            }
+        }
+        else
+        {
+            if (outerRing != null)
+                outerRing.localScale = Vector3.one * outerStartScale;
+            if (outerRingImage != null)
+                outerRingImage.color = chargingColor;
+            flashedThisPulse = false;
         }
 
-        // Плавно скрываем когда нет активных слотов
         float targetAlpha = activeSlots.Count > 0 ? 1f : 0f;
         canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, Time.deltaTime * 4f);
     }
@@ -46,18 +82,17 @@ public class ComboWindowUI : MonoBehaviour
         var label = slot.GetComponentInChildren<TextMeshProUGUI>();
         if (label != null) label.text = card.cardName;
         activeSlots.Add(slot);
-
-        // Запускаем/обновляем таймер
-        timerStart = Time.time;
-        timerDuration = ComboSystem.Instance.comboWindow;
-        timerActive = true;
     }
 
     public void ClearSlots()
     {
         foreach (var s in activeSlots) Destroy(s);
         activeSlots.Clear();
-        timerActive = false;
-        timerBar.fillAmount = 0f;
+
+        flashedThisPulse = false;
+        if (outerRing != null)
+            outerRing.localScale = Vector3.one * outerStartScale;
+        if (outerRingImage != null)
+            outerRingImage.color = chargingColor;
     }
 }

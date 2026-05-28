@@ -1,0 +1,807 @@
+Scene: MapScene
+Dumped: 2026-05-28 00:31
+============================================================
+Main Camera
+  [Transform] pos=(0.0,10.0,-7.0) rot=(50,0,0) scale=(1.0,1.0,1.0)
+  [Camera]
+    Clear Flags = Skybox
+    Back Ground Color = #314D7900
+    Projection Matrix Mode = 1
+    Gate Fit Mode = 2
+    FOV Axis Mode = 0
+    Iso = 200
+    Shutter Speed = 0.01
+    Aperture = 16.00
+    Focus Distance = 10.00
+    Focal Length = 50.00
+    Blade Count = 5
+    Curvature = (2.0,11.0)
+    Barrel Clipping = 0.25
+    Anamorphism = 0.00
+    Sensor Size = (36.0,24.0)
+    Lens Shift = (0.0,0.0)
+    Near clip plane = 0.30
+    Far clip plane = 1000.00
+    Field of view = 60.00
+    Orthographic = False
+    Orthographic size = 5.00
+    Depth = -1.00
+    Rendering Path = Use Graphics Settings
+    Target Texture = <none>
+    Target Display = 0
+    Target Eye = 3
+    HDR = True
+    Allow MSAA = True
+    Allow Dynamic Resolution = False
+    Force Into RT = False
+    Occlusion Culling = True
+    Stereo Convergence = 10.00
+    Stereo Separation = 0.02
+  [AudioListener]
+  [MapCameraController]
+    Target = Hero (Transform)
+    Distance = 10.00
+    Min Distance = 4.00
+    Max Distance = 20.00
+    Zoom Speed = 20.00
+    Horizontal Speed = 200.00
+    Vertical Speed = 120.00
+    Min Pitch = 15.00
+    Max Pitch = 80.00
+    Position Lerp = 8.00
+    Rotation Lerp = 12.00
+    Inertia Decay = 5.00
+Global Volume
+  [Volume]
+    Is Global = True
+    Priority = 0.00
+    Blend Distance = 0.00
+    Weight = 1.00
+    Shared Profile = AliceVolumeProfile (VolumeProfile)
+Environment
+  [Transform] pos=(1.4,0.2,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+POIs
+  [Transform] pos=(1.4,0.2,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+  POI_01_Start
+    [Transform] pos=(-16.3,0.9,-10.7) rot=(0,0,0) scale=(1.0,0.2,1.0)
+    [MeshFilter]
+      Mesh = Cylinder (Mesh)
+    [MeshRenderer]
+      Cast Shadows = On
+      Receive Shadows = True
+      Dynamic Occludee = True
+      Static Shadow Caster = False
+      Motion Vectors = Per Object Motion
+      Light Probe Usage = 1
+      Reflection Probe Usage = 1
+      Ray Tracing Mode = 2
+      Ray Trace Procedural = False
+      Ray Tracing Accel Struct Build Flags Override = False
+      Ray Tracing Accel Struct Build Flags = 1
+      Small Mesh Culling = True
+      Force Mesh Lod = -1
+      Mesh Lod Selection Bias = 0.00
+      Rendering Layer Mask = 1
+      Renderer Priority = 0
+      Probe Anchor = <none>
+      Light Probe Volume Override = <none>
+      Scale In Lightmap = 1.00
+      Receive GI = 1
+      Preserve U Vs = False
+      Ignore Normals For Chart Detection = False
+      Important GI = False
+      Stitch Lightmap Seams = True
+      Minimum Chart Size = 4
+      Auto UV Max Distance = 0.50
+      Auto UV Max Angle = 89.00
+      Lightmap Parameters = <none>
+      Mask Interaction = None
+    [CapsuleCollider]
+      Material = <none>
+      Layer Override Priority = 0
+      Is Trigger = False
+      Provides Contacts = False
+      Radius = 0.50
+      Height = 2.00
+      Direction = Y-Axis
+      Center = (0.0,0.0,0.0)
+    [PointOfInterest]
+      Poi ID = 1
+      Is Fixed = True
+      Fixed Type = Story
+      Spawn Chance = 1.00
+      Chance Empty = 0.00
+      Chance Combat = 0.00
+      Chance Event = 0.00
+      Chance Merchant = 0.00
+      Chance Friend = 0.00
+      Icon Quad = <none>
+      Icon Combat = <none>
+      Icon Story = <none>
+      Icon Event = <none>
+      Icon Merchant = <none>
+      Icon Boss = <none>
+      Icon Friend = <none>
+      Icon Empty = <none>
+    Icon
+      [Transform] pos=(0.0,0.2,0.0) rot=(90,0,0) scale=(0.7,0.7,1.0)
+      [MeshFilter]
+        Mesh = Quad (Mesh)
+      [MeshRenderer]
+        Cast Shadows = On
+        Receive Shadows = True
+        Dynamic Occludee = True
+        Static Shadow Caster = False
+        Motion Vectors = Per Object Motion
+        Light Probe Usage = 1
+        Reflection Probe Usage = 1
+        Ray Tracing Mode = 2
+        Ray Trace Procedural = False
+        Ray Tracing Accel Struct Build Flags Override = False
+        Ray Tracing Accel Struct Build Flags = 1
+        Small Mesh Culling = True
+        Force Mesh Lod = -1
+        Mesh Lod Selection Bias = 0.00
+        Rendering Layer Mask = 1
+        Renderer Priority = 0
+        Probe Anchor = <none>
+        Light Probe Volume Override = <none>
+        Scale In Lightmap = 1.00
+        Receive GI = 1
+        Preserve U Vs = False
+        Ignore Normals For Chart Detection = False
+        Important GI = False
+        Stitch Lightmap Seams = True
+        Minimum Chart Size = 4
+        Auto UV Max Distance = 0.50
+        Auto UV Max Angle = 89.00
+        Lightmap Parameters = <none>
+        Mask Interaction = None
+      [MeshCollider]
+        Material = <none>
+        Layer Override Priority = 0
+        Is Trigger = False
+        Provides Contacts = False
+        Convex = False
+        Cooking Options = 30
+        Mesh = Quad (Mesh)
+Canvas
+  [RectTransform] pos=(746,422) size=(1491x844) anchor=(0.0,0.0)-(0.0,0.0) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+  [Canvas]
+    Render Mode = Screen Space - Overlay
+    Camera = <none>
+    Plane Distance = 100.00
+    Pixel Perfect = False
+    Receives Events = True
+    Override Sorting = False
+    Override Pixel Perfect = False
+    Sorting Bucket Normalized Size = 0.00
+    Vertex Color Always Gamma Space = False
+    Use Reflection Probes = False
+    Additional Shader Channels Flag = (25)
+    Update Rect Transform For Standalone = Enabled
+  [CanvasScaler]
+    Ui Scale Mode = Constant Pixel Size
+    Reference Pixels Per Unit = 100.00
+    Scale Factor = 1.00
+    Reference Resolution = (800.0,600.0)
+    Screen Match Mode = Match Width Or Height
+    Match Width Or Height = 0.00
+    Physical Unit = Points
+    Fallback Screen DPI = 96.00
+    Default Sprite DPI = 96.00
+    Dynamic Pixels Per Unit = 1.00
+    Preset Info Is World = False
+  [GraphicRaycaster]
+    Ignore Reversed Graphics = True
+    Blocking Objects = None
+  [EventOverlay]
+    Panel Root = EventPanel (GameObject)
+    Event Image = EventImage (Image)
+    Title Text = TitleText (TextMeshProUGUI)
+    Description Text = DescriptionText (TextMeshProUGUI)
+    Choices Container = ChoicesContainer (RectTransform)
+    Choice Button Prefab = ChoiceButton (GameObject)
+    Outcome Panel = OutcomePanel (GameObject)
+    Outcome Image = OutcomeImage (Image)
+    Outcome Text = OutcomeText (TextMeshProUGUI)
+    Continue Button = ContinueButton (Button)
+    Event Database = EventDatabase_Main (EventDatabase)
+    Current Act = Act 1_City
+  EventPanel [INACTIVE]
+    [RectTransform] pos=(0,0) size=(0x0) anchor=(0.0,0.0)-(1.0,1.0) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+    BackgroundDim
+      [RectTransform] pos=(0,0) size=(-1384x-676) anchor=(0.0,0.0)-(1.0,1.0) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+      [Image]
+        Material = <none>
+        Color = #000000B4
+        Raycast Target = True
+        Maskable = True
+        Sprite = <none>
+        Type = Simple
+        Preserve Aspect = False
+        Fill Center = True
+        Fill Method = Radial 360
+        Fill Amount = 1.00
+        Fill Clockwise = True
+        Fill Origin = 0
+        Use Sprite Mesh = False
+        Pixels Per Unit Multiplier = 1.00
+    EventCard
+      [RectTransform] pos=(0,0) size=(600x500) anchor=(0.5,0.5)-(0.5,0.5) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+      [Image]
+        Material = <none>
+        Color = #2C2C2AFF
+        Raycast Target = True
+        Maskable = True
+        Sprite = <none>
+        Type = Simple
+        Preserve Aspect = False
+        Fill Center = True
+        Fill Method = Radial 360
+        Fill Amount = 1.00
+        Fill Clockwise = True
+        Fill Origin = 0
+        Use Sprite Mesh = False
+        Pixels Per Unit Multiplier = 1.00
+      Content
+        [RectTransform] pos=(0,0) size=(-40x-40) anchor=(0.0,0.0)-(1.0,1.0) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+        [VerticalLayoutGroup]
+          Child Alignment = Upper Center
+          Spacing = 15.00
+          Child Force Expand Width = True
+          Child Force Expand Height = False
+          Child Control Width = True
+          Child Control Height = False
+          Child Scale Width = False
+          Child Scale Height = False
+          Reverse Arrangement = False
+        EventImage
+          [RectTransform] pos=(280,-70) size=(520x100) anchor=(0.0,1.0)-(0.0,1.0) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+          [Image]
+            Material = <none>
+            Color = #FFFFFFFF
+            Raycast Target = True
+            Maskable = True
+            Sprite = <none>
+            Type = Simple
+            Preserve Aspect = False
+            Fill Center = True
+            Fill Method = Radial 360
+            Fill Amount = 1.00
+            Fill Clockwise = True
+            Fill Origin = 0
+            Use Sprite Mesh = False
+            Pixels Per Unit Multiplier = 1.00
+          [LayoutElement]
+            Ignore Layout = False
+            Min Width = -1.00
+            Min Height = -1.00
+            Preferred Width = -1.00
+            Preferred Height = 200.00
+            Flexible Width = -1.00
+            Flexible Height = -1.00
+            Layout Priority = 1
+        TitleText
+          [RectTransform] pos=(280,-160) size=(520x50) anchor=(0.0,1.0)-(0.0,1.0) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+          [TextMeshProUGUI]
+            Material = <none>
+            Color = #FFFFFFFF
+            Raycast Target = True
+            Maskable = True
+            Text = "Event Title"
+            Is Right To Left = False
+            Font Asset = LiberationSans SDF (TMP_FontAsset)
+            Shared Material = LiberationSans SDF Material (Material)
+            Font Material = <none>
+            Font Color 32 = #FFFFFFFF
+            Font Color = #FFFFFFFF
+            Enable Vertex Gradient = False
+            Color Mode = Four Corners Gradient
+            Font Color Gradient Preset = <none>
+            Sprite Asset = <none>
+            Tint All Sprites = False
+            Style Sheet = <none>
+            Text Style Hash Code = -1183493901
+            Override Html Colors = False
+            Face Color = #FFFFFFFF
+            Font Size = 28.00
+            Font Size Base = 28.00
+            Font Weight = Regular
+            Enable Auto Sizing = False
+            Font Size Min = 18.00
+            Font Size Max = 72.00
+            Font Style = Normal
+            Horizontal Alignment = Center
+            Vertical Alignment = Middle
+            Text Alignment = Converted
+            Character Spacing = 0.00
+            Character Horizontal Scale = 1.00
+            Word Spacing = 0.00
+            Line Spacing = 0.00
+            Line Spacing Max = 0.00
+            Paragraph Spacing = 0.00
+            Char Width Max Adj = 0.00
+            Text Wrapping Mode = Normal
+            Word Wrapping Ratios = 0.40
+            Overflow Mode = Overflow
+            Linked Text Component = <none>
+            Parent Linked Component = <none>
+            Enable Kerning = False
+            Enable Extra Padding = False
+            Check Padding Required = False
+            Is Rich Text = True
+            Emoji Fallback Support = True
+            Parse Ctrl Characters = True
+            Is Orthographic = True
+            Is Culling Enabled = False
+            Horizontal Mapping = Character
+            Vertical Mapping = Character
+            Uv Line Offset = 0.00
+            Geometry Sorting Order = Normal
+            Is Text Object Scale Static = False
+            Vertex Buffer Auto Size Reduction = False
+            Use Max Visible Descender = True
+            Page To Display = 1
+            Is Using Legacy Animation Component = False
+            Is Volumetric Text = False
+            Has Font Asset Changed = False
+            Base Material = <none>
+          [LayoutElement]
+            Ignore Layout = False
+            Min Width = -1.00
+            Min Height = -1.00
+            Preferred Width = -1.00
+            Preferred Height = 40.00
+            Flexible Width = -1.00
+            Flexible Height = -1.00
+            Layout Priority = 1
+        DescriptionText
+          [RectTransform] pos=(280,-225) size=(520x50) anchor=(0.0,1.0)-(0.0,1.0) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+          [TextMeshProUGUI]
+            Material = <none>
+            Color = #FFFFFFFF
+            Raycast Target = True
+            Maskable = True
+            Text = "New Text"
+            Is Right To Left = False
+            Font Asset = LiberationSans SDF (TMP_FontAsset)
+            Shared Material = LiberationSans SDF Material (Material)
+            Font Material = <none>
+            Font Color 32 = #FFFFFFFF
+            Font Color = #FFFFFFFF
+            Enable Vertex Gradient = False
+            Color Mode = Four Corners Gradient
+            Font Color Gradient Preset = <none>
+            Sprite Asset = <none>
+            Tint All Sprites = False
+            Style Sheet = <none>
+            Text Style Hash Code = -1183493901
+            Override Html Colors = False
+            Face Color = #FFFFFFFF
+            Font Size = 16.00
+            Font Size Base = 16.00
+            Font Weight = Regular
+            Enable Auto Sizing = False
+            Font Size Min = 18.00
+            Font Size Max = 72.00
+            Font Style = Normal
+            Horizontal Alignment = Left
+            Vertical Alignment = Top
+            Text Alignment = Converted
+            Character Spacing = 0.00
+            Character Horizontal Scale = 1.00
+            Word Spacing = 0.00
+            Line Spacing = 0.00
+            Line Spacing Max = 0.00
+            Paragraph Spacing = 0.00
+            Char Width Max Adj = 0.00
+            Text Wrapping Mode = Normal
+            Word Wrapping Ratios = 0.40
+            Overflow Mode = Overflow
+            Linked Text Component = <none>
+            Parent Linked Component = <none>
+            Enable Kerning = False
+            Enable Extra Padding = False
+            Check Padding Required = False
+            Is Rich Text = True
+            Emoji Fallback Support = True
+            Parse Ctrl Characters = True
+            Is Orthographic = True
+            Is Culling Enabled = False
+            Horizontal Mapping = Character
+            Vertical Mapping = Character
+            Uv Line Offset = 0.00
+            Geometry Sorting Order = Normal
+            Is Text Object Scale Static = False
+            Vertex Buffer Auto Size Reduction = False
+            Use Max Visible Descender = True
+            Page To Display = 1
+            Is Using Legacy Animation Component = False
+            Is Volumetric Text = False
+            Has Font Asset Changed = False
+            Base Material = <none>
+          [LayoutElement]
+            Ignore Layout = False
+            Min Width = -1.00
+            Min Height = -1.00
+            Preferred Width = -1.00
+            Preferred Height = 100.00
+            Flexible Width = -1.00
+            Flexible Height = -1.00
+            Layout Priority = 1
+        ChoicesContainer
+          [RectTransform] pos=(280,-315) size=(520x100) anchor=(0.0,1.0)-(0.0,1.0) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+          [VerticalLayoutGroup]
+            Child Alignment = Upper Left
+            Spacing = 8.00
+            Child Force Expand Width = True
+            Child Force Expand Height = True
+            Child Control Width = False
+            Child Control Height = False
+            Child Scale Width = False
+            Child Scale Height = False
+            Reverse Arrangement = False
+          [LayoutElement]
+            Ignore Layout = False
+            Min Width = -1.00
+            Min Height = -1.00
+            Preferred Width = -1.00
+            Preferred Height = 150.00
+            Flexible Width = -1.00
+            Flexible Height = -1.00
+            Layout Priority = 1
+      OutcomePanel
+        [RectTransform] pos=(0,0) size=(-500x-400) anchor=(0.0,0.0)-(1.0,1.0) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+        [Image]
+          Material = <none>
+          Color = #2C2C2AFF
+          Raycast Target = True
+          Maskable = True
+          Sprite = <none>
+          Type = Simple
+          Preserve Aspect = False
+          Fill Center = True
+          Fill Method = Radial 360
+          Fill Amount = 1.00
+          Fill Clockwise = True
+          Fill Origin = 0
+          Use Sprite Mesh = False
+          Pixels Per Unit Multiplier = 1.00
+        OutcomeImage
+          [RectTransform] pos=(0,0) size=(100x100) anchor=(0.5,0.5)-(0.5,0.5) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+          [Image]
+            Material = <none>
+            Color = #FFFFFFFF
+            Raycast Target = True
+            Maskable = True
+            Sprite = <none>
+            Type = Simple
+            Preserve Aspect = False
+            Fill Center = True
+            Fill Method = Radial 360
+            Fill Amount = 1.00
+            Fill Clockwise = True
+            Fill Origin = 0
+            Use Sprite Mesh = False
+            Pixels Per Unit Multiplier = 1.00
+          [LayoutElement]
+            Ignore Layout = False
+            Min Width = -1.00
+            Min Height = -1.00
+            Preferred Width = -1.00
+            Preferred Height = 200.00
+            Flexible Width = -1.00
+            Flexible Height = -1.00
+            Layout Priority = 1
+        OutcomeText
+          [RectTransform] pos=(0,0) size=(200x50) anchor=(0.5,0.5)-(0.5,0.5) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+          [TextMeshProUGUI]
+            Material = <none>
+            Color = #FFFFFFFF
+            Raycast Target = True
+            Maskable = True
+            Text = "New Text"
+            Is Right To Left = False
+            Font Asset = LiberationSans SDF (TMP_FontAsset)
+            Shared Material = LiberationSans SDF Material (Material)
+            Font Material = <none>
+            Font Color 32 = #FFFFFFFF
+            Font Color = #FFFFFFFF
+            Enable Vertex Gradient = False
+            Color Mode = Four Corners Gradient
+            Font Color Gradient Preset = <none>
+            Sprite Asset = <none>
+            Tint All Sprites = False
+            Style Sheet = <none>
+            Text Style Hash Code = -1183493901
+            Override Html Colors = False
+            Face Color = #FFFFFFFF
+            Font Size = 18.00
+            Font Size Base = 18.00
+            Font Weight = Regular
+            Enable Auto Sizing = False
+            Font Size Min = 18.00
+            Font Size Max = 72.00
+            Font Style = Normal
+            Horizontal Alignment = Left
+            Vertical Alignment = Top
+            Text Alignment = Converted
+            Character Spacing = 0.00
+            Character Horizontal Scale = 1.00
+            Word Spacing = 0.00
+            Line Spacing = 0.00
+            Line Spacing Max = 0.00
+            Paragraph Spacing = 0.00
+            Char Width Max Adj = 0.00
+            Text Wrapping Mode = Normal
+            Word Wrapping Ratios = 0.40
+            Overflow Mode = Overflow
+            Linked Text Component = <none>
+            Parent Linked Component = <none>
+            Enable Kerning = False
+            Enable Extra Padding = False
+            Check Padding Required = False
+            Is Rich Text = True
+            Emoji Fallback Support = True
+            Parse Ctrl Characters = True
+            Is Orthographic = True
+            Is Culling Enabled = False
+            Horizontal Mapping = Character
+            Vertical Mapping = Character
+            Uv Line Offset = 0.00
+            Geometry Sorting Order = Normal
+            Is Text Object Scale Static = False
+            Vertex Buffer Auto Size Reduction = False
+            Use Max Visible Descender = True
+            Page To Display = 1
+            Is Using Legacy Animation Component = False
+            Is Volumetric Text = False
+            Has Font Asset Changed = False
+            Base Material = <none>
+          [LayoutElement]
+            Ignore Layout = False
+            Min Width = -1.00
+            Min Height = -1.00
+            Preferred Width = -1.00
+            Preferred Height = 150.00
+            Flexible Width = -1.00
+            Flexible Height = -1.00
+            Layout Priority = 1
+        ContinueButton
+          [RectTransform] pos=(0,0) size=(160x30) anchor=(0.5,0.5)-(0.5,0.5) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+          [Image]
+            Material = <none>
+            Color = #FFFFFFFF
+            Raycast Target = True
+            Maskable = True
+            Sprite = UISprite (Sprite)
+            Type = Sliced
+            Preserve Aspect = False
+            Fill Center = True
+            Fill Method = Radial 360
+            Fill Amount = 1.00
+            Fill Clockwise = True
+            Fill Origin = 0
+            Use Sprite Mesh = False
+            Pixels Per Unit Multiplier = 1.00
+          [Button]
+            Transition = Color Tint
+            Interactable = True
+            Target Graphic = ContinueButton (Image)
+          [LayoutElement]
+            Ignore Layout = False
+            Min Width = -1.00
+            Min Height = -1.00
+            Preferred Width = -1.00
+            Preferred Height = 50.00
+            Flexible Width = -1.00
+            Flexible Height = -1.00
+            Layout Priority = 1
+          Text (TMP)
+            [RectTransform] pos=(0,0) size=(0x0) anchor=(0.0,0.0)-(1.0,1.0) pivot=(0.5,0.5) scale=(1.0,1.0,1.0)
+            [TextMeshProUGUI]
+              Material = <none>
+              Color = #FFFFFFFF
+              Raycast Target = True
+              Maskable = True
+              Text = "Continue"
+              Is Right To Left = False
+              Font Asset = LiberationSans SDF (TMP_FontAsset)
+              Shared Material = LiberationSans SDF Material (Material)
+              Font Material = <none>
+              Font Color 32 = #323232FF
+              Font Color = #323232FF
+              Enable Vertex Gradient = False
+              Color Mode = Four Corners Gradient
+              Font Color Gradient Preset = <none>
+              Sprite Asset = <none>
+              Tint All Sprites = False
+              Style Sheet = <none>
+              Text Style Hash Code = -1183493901
+              Override Html Colors = False
+              Face Color = #FFFFFFFF
+              Font Size = 24.00
+              Font Size Base = 24.00
+              Font Weight = Regular
+              Enable Auto Sizing = False
+              Font Size Min = 18.00
+              Font Size Max = 72.00
+              Font Style = Normal
+              Horizontal Alignment = Center
+              Vertical Alignment = Middle
+              Text Alignment = Converted
+              Character Spacing = 0.00
+              Character Horizontal Scale = 1.00
+              Word Spacing = 0.00
+              Line Spacing = 0.00
+              Line Spacing Max = 0.00
+              Paragraph Spacing = 0.00
+              Char Width Max Adj = 0.00
+              Text Wrapping Mode = Normal
+              Word Wrapping Ratios = 0.40
+              Overflow Mode = Overflow
+              Linked Text Component = <none>
+              Parent Linked Component = <none>
+              Enable Kerning = False
+              Enable Extra Padding = False
+              Check Padding Required = False
+              Is Rich Text = True
+              Emoji Fallback Support = True
+              Parse Ctrl Characters = True
+              Is Orthographic = True
+              Is Culling Enabled = False
+              Horizontal Mapping = Character
+              Vertical Mapping = Character
+              Uv Line Offset = 0.00
+              Geometry Sorting Order = Normal
+              Is Text Object Scale Static = False
+              Vertex Buffer Auto Size Reduction = False
+              Use Max Visible Descender = True
+              Page To Display = 1
+              Is Using Legacy Animation Component = False
+              Is Volumetric Text = False
+              Has Font Asset Changed = False
+              Base Material = <none>
+MapManager
+  [MapManager]
+    Hero = Hero (HeroFigure)
+    Starting POI = POI_01_Start (PointOfInterest)
+    Regenerate After Visits = 5
+GameState
+  [GameState]
+    Current POI_ID = -1
+    Visit Count = 0
+    Pending POI_ID = -1
+SceneFlow
+  [Transform] pos=(0.2,0.2,-0.4) rot=(0,0,0) scale=(1.0,1.0,1.0)
+  [SceneFlow]
+Hero
+  [Transform] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(0.4,0.4,0.4)
+  [MeshFilter]
+    Mesh = Capsule (Mesh)
+  [MeshRenderer]
+    Cast Shadows = On
+    Receive Shadows = True
+    Dynamic Occludee = True
+    Static Shadow Caster = False
+    Motion Vectors = Per Object Motion
+    Light Probe Usage = 1
+    Reflection Probe Usage = 1
+    Ray Tracing Mode = 2
+    Ray Trace Procedural = False
+    Ray Tracing Accel Struct Build Flags Override = False
+    Ray Tracing Accel Struct Build Flags = 1
+    Small Mesh Culling = True
+    Force Mesh Lod = -1
+    Mesh Lod Selection Bias = 0.00
+    Rendering Layer Mask = 1
+    Renderer Priority = 0
+    Probe Anchor = <none>
+    Light Probe Volume Override = <none>
+    Scale In Lightmap = 1.00
+    Receive GI = 1
+    Preserve U Vs = False
+    Ignore Normals For Chart Detection = False
+    Important GI = False
+    Stitch Lightmap Seams = True
+    Minimum Chart Size = 4
+    Auto UV Max Distance = 0.50
+    Auto UV Max Angle = 89.00
+    Lightmap Parameters = <none>
+    Mask Interaction = None
+  [CapsuleCollider]
+    Material = <none>
+    Layer Override Priority = 0
+    Is Trigger = False
+    Provides Contacts = False
+    Radius = 0.50
+    Height = 2.00
+    Direction = Y-Axis
+    Center = (0.0,0.0,0.0)
+  [HeroFigure]
+    Move Speed = 3.00
+Directional Light
+  [Transform] pos=(0.0,3.0,0.0) rot=(40,330,0) scale=(1.0,1.0,1.0)
+  [Light]
+    Type = Directional
+    Color = #FFD9A8FF
+    Intensity = 0.70
+    Range = 10.00
+    Spot Angle = 30.00
+    Inner Spot Angle = 21.80
+    Cookie Size 2D = (0.5,0.5)
+    Cookie = <none>
+    Draw Halo = False
+    Flare = <none>
+    Render Mode = Auto
+    Rendering Layer Mask = 1
+    Lightmapping = Realtime
+    Light Shadow Caster Mode = 0
+    Area Size = (1.0,1.0)
+    Bounce Intensity = 1.00
+    Color Temperature = 6570.00
+    Use Color Temperature = False
+    Use Bounding Sphere Override = False
+    Use View Frustum For Shadow Caster Cull = True
+    Force Visible = False
+    Shape Radius = 0.03
+    Shadow Angle = 0.00
+    Light Unit = 1
+    Lux At Distance = 1.00
+    Enable Spot Reflector = True
+EventSystem
+  [EventSystem]
+    First Selected = <none>
+    Send Navigation Events = True
+    Drag Threshold = 10
+  [InputSystemUIInputModule]
+    Send Pointer Hover To Parent = True
+    Move Repeat Delay = 0.50
+    Move Repeat Rate = 0.10
+    XR Tracking Origin = <none>
+    Deselect On Background Click = True
+    Pointer Behavior = Single Mouse Or Pen But Multi Touch And Track
+    Scroll Delta Per Tick = 6.00
+MapBoard
+  [Transform] pos=(0.0,0.0,0.0) rot=(270,0,0) scale=(1.0,1.0,1.0)
+  [MeshFilter]
+    Mesh = Cylinder.432 (Mesh)
+  [MeshRenderer]
+    Cast Shadows = On
+    Receive Shadows = True
+    Dynamic Occludee = True
+    Static Shadow Caster = False
+    Motion Vectors = Per Object Motion
+    Light Probe Usage = 1
+    Reflection Probe Usage = 1
+    Ray Tracing Mode = 2
+    Ray Trace Procedural = False
+    Ray Tracing Accel Struct Build Flags Override = False
+    Ray Tracing Accel Struct Build Flags = 1
+    Small Mesh Culling = True
+    Force Mesh Lod = -1
+    Mesh Lod Selection Bias = 0.00
+    Rendering Layer Mask = 1
+    Renderer Priority = 0
+    Probe Anchor = <none>
+    Light Probe Volume Override = <none>
+    Scale In Lightmap = 1.00
+    Receive GI = 1
+    Preserve U Vs = False
+    Ignore Normals For Chart Detection = False
+    Important GI = False
+    Stitch Lightmap Seams = True
+    Minimum Chart Size = 4
+    Auto UV Max Distance = 0.50
+    Auto UV Max Angle = 89.00
+    Lightmap Parameters = <none>
+    Mask Interaction = None
+  [MeshCollider]
+    Material = <none>
+    Layer Override Priority = 0
+    Is Trigger = False
+    Provides Contacts = False
+    Convex = False
+    Cooking Options = 30
+    Mesh = Cylinder.432 (Mesh)
