@@ -14,7 +14,6 @@ public class EnemyAttack : MonoBehaviour
     [Tooltip("Сколько beats пропустить перед первой атакой")]
     public int warmupBeats = 2;
 
-    private int beatCounter;
     private bool subscribed;
 
     void Awake() => Instance = this;
@@ -37,14 +36,38 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Детерминированный запрос: будет ли на этом бите вражеский удар?
+    /// Единый источник истины — и для самого удара (OnBeatReceived), и для
+    /// телеграфа (BPMVisualizer при спавне шара). Не зависит от порядка подписки
+    /// на OnBeat, не читает изменяемое состояние — рассинхрон исключён по построению.
+    /// </summary>
+    public bool IsAttackBeat(int beat)
+    {
+        if (attackEveryBeats <= 0) return false;
+        if (beat < warmupBeats) return false;
+        return (beat - warmupBeats) % attackEveryBeats == 0;
+    }
+
+    /// <summary>
+    /// Для отладки/UI: ближайший будущий бит атаки от заданного. -1 если враг неактивен.
+    /// </summary>
+    public int GetNextAttackBeatFrom(int currentBeat)
+    {
+        if (attackEveryBeats <= 0) return -1;
+        int probe = Mathf.Max(currentBeat, warmupBeats);
+        for (int i = 0; i < attackEveryBeats; i++)
+        {
+            if (IsAttackBeat(probe + i)) return probe + i;
+        }
+        return -1;
+    }
+
     void OnBeatReceived(int beatNumber)
     {
         if (BattleManager.Instance == null || BattleManager.Instance.battleEnded) return;
 
-        beatCounter++;
-        if (beatCounter < warmupBeats) return;
-
-        if ((beatCounter - warmupBeats) % attackEveryBeats == 0)
+        if (IsAttackBeat(beatNumber))
             Attack();
     }
 

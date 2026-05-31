@@ -1,16 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using DG.Tweening;
 
 public class ComboWindowUI : MonoBehaviour
 {
     public static ComboWindowUI Instance;
 
-    [Header("Card Slots")]
-    public Transform slotsContainer;
-    public GameObject slotPrefab;
+    [Header("Canvas")]
     public CanvasGroup canvasGroup;
 
     [Header("Beat Rings")]
@@ -23,7 +18,6 @@ public class ComboWindowUI : MonoBehaviour
     public Color chargingColor = Color.white;
     public Color perfectColor = new Color(1f, 0.85f, 0.2f, 1f);
 
-    private List<GameObject> activeSlots = new List<GameObject>();
     private bool flashedThisPulse;
 
     void Awake() => Instance = this;
@@ -31,7 +25,7 @@ public class ComboWindowUI : MonoBehaviour
     void Start()
     {
         if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0f;
+        if (canvasGroup != null) canvasGroup.alpha = 0f;
 
         if (outerRing != null)
             outerRing.localScale = Vector3.one * outerStartScale;
@@ -72,23 +66,18 @@ public class ComboWindowUI : MonoBehaviour
             flashedThisPulse = false;
         }
 
-        float targetAlpha = activeSlots.Count > 0 ? 1f : 0f;
-        canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, Time.deltaTime * 4f);
+        if (canvasGroup != null)
+        {
+            float targetAlpha = charging ? 1f : 0f;
+            canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, Time.deltaTime * 4f);
+        }
     }
 
-    public void AddCard(CardData card)
-    {
-        var slot = Instantiate(slotPrefab, slotsContainer);
-        var label = slot.GetComponentInChildren<TextMeshProUGUI>();
-        if (label != null) label.text = card.cardName;
-        activeSlots.Add(slot);
-    }
-
+    // Слоты-чипы убраны по концепту (`battle_concept.html`).
+    // API остаётся для совместимости с ComboSystem — это no-op.
+    public void AddCard(CardData card) { }
     public void ClearSlots()
     {
-        foreach (var s in activeSlots) Destroy(s);
-        activeSlots.Clear();
-
         flashedThisPulse = false;
         if (outerRing != null)
             outerRing.localScale = Vector3.one * outerStartScale;

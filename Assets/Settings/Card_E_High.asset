@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Card_E_High
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: "E\u2191"
-  voltageCost: 1
+  hotkey: 18
+  cooldownBeats: 0.5
+  equippedPedal: {fileID: 0}
+  voltageCost: 30
   damage: 0
   effect: 6
   effectValue: 0
   effectDuration: 0
-  hotkey: 18

@@ -53,7 +53,7 @@ public class CardButton : MonoBehaviour
 
         if (labelCost != null && card != null)
         {
-            labelCost.text = $"{card.voltageCost:F0}%";
+            labelCost.text = $"{card.GetVoltageCost():F0}%";
             labelCost.color = costColor;
         }
 
@@ -103,7 +103,10 @@ public class CardButton : MonoBehaviour
 
     void OnClick()
     {
-        ComboSystem.Instance.OnCardPressed(card);
+        bool queued = ComboSystem.Instance.OnCardPressed(card);
+        if (!queued) return;
+
         stringVisual?.PlayHit();
+        MultiplierIndicator.Instance?.OnCardPressed(card, (RectTransform)transform);
     }
 }

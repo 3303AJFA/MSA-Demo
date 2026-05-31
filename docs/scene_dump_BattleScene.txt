@@ -1,4 +1,4 @@
-Scene: BattleScene | 2026-05-28 19:52
+Scene: BattleScene | 2026-05-29 20:07
 --------------------------------------------------
 Main Camera
   [Camera]
@@ -84,22 +84,27 @@ Global Volume
     Priority = 0.00
     Blend Distance = 0.00
     Weight = 1.00
-    Shared Profile = AliceVolumeProfile (VolumeProfile)
+    Shared Profile = BattleVolumeProfile (VolumeProfile)
 BattleManager
   [BattleManager]
     Max Voltage = 100.00
     Current Voltage = 100.00
     Voltage Regen Rate = 10.00
     Player HP = 100
+    Player Max HP = 100
     Enemy HP = 1000
+    Enemy Max HP = 100
     Battle Ended = False
   [ComboSystem]
     Max Combo Size = 6
-    Input Cooldown Beats = 0.50
+    Default Cooldown Beats = 0.50
+    Combo Decay Beats = 2.00
     Perfect Window = 0.15
     Good Window = 0.30
     Perfect Bonus = 1.50
     Good Bonus = 1.25
+    Off Beat Penalty = 0.85
+    Streak Debug Text = StreakDebug (TextMeshProUGUI)
   [AudioSystem]
     Note E_Low = E_Low (AudioClip)
     Note A = A (AudioClip)
@@ -114,17 +119,21 @@ BattleManager
     Is Bleeding = False
     Bleed Damage = 5.00
     Bleed Interval = 0.50
-    Is Amplified = False
-    Amplify Multiplier = 2.00
-    Shield HP = 0
+    Is Poisoned = False
+    Poison Damage = 3.00
+    Poison Interval = 1.00
+    Amplify Stacks = 0
+    Amplify Stack Base = 2.00
+    Shield HP = 100
+    Shield Decay Per Second = 1.00
   [BeatManager]
-    Bpm = 120.00
+    Bpm = 90.00
   [EnemyAttack]
     Attack Every Beats = 4
     Damage Per Attack = 8
     Warmup Beats = 2
 Canvas
-  [RT] pos=(734,422) size=(1899x1092) anchor=(0.0,0.0)-(0.0,0.0) scale=(0.8,0.8,0.8)
+  [RT] pos=(783,423) size=(1960x1058) anchor=(0.0,0.0)-(0.0,0.0) scale=(0.8,0.8,0.8)
   [Canvas]
     Render Mode = Screen Space - Overlay
     Camera = <none>
@@ -167,6 +176,7 @@ Canvas
       Sprite Active = segment_active (Sprite)
       Sprite Empty = segment_empty (Sprite)
       Sprite Damaged = segment_damaged (Sprite)
+      Sprite Shield = segment_shield (Sprite)
       Enemy Sprite Active = <none>
       Enemy Sprite Empty = <none>
       Enemy Sprite Damaged = <none>
@@ -339,6 +349,7 @@ Canvas
       Circle Prefab = BeatCircle (GameObject)
       Beat Strong = Beat_Strong (AudioClip)
       Beat Weak = Beat_Weak (AudioClip)
+      Preview Beats = 2
     Line_BG
       [RT] pos=(-11,0) size=(19x6) anchor=(0.0,0.5)-(1.0,0.5) scale=(1.0,1.0,1.0)
       [Image]
@@ -442,7 +453,7 @@ Canvas
           Font Color = #8F8A78FF
           Font Size = 16.00
           Font Weight = Regular
-          Font Style = Normal
+          Font Style = Italic
           Horizontal Alignment = Center
           Vertical Alignment = Middle
           Text Alignment = Converted
@@ -540,7 +551,7 @@ Canvas
           Font Color = #8F8A78FF
           Font Size = 16.00
           Font Weight = Regular
-          Font Style = Normal
+          Font Style = Italic
           Horizontal Alignment = Center
           Vertical Alignment = Middle
           Text Alignment = Converted
@@ -632,7 +643,7 @@ Canvas
           Font Color = #8F8A78FF
           Font Size = 16.00
           Font Weight = Regular
-          Font Style = Normal
+          Font Style = Italic
           Horizontal Alignment = Center
           Vertical Alignment = Middle
           Text Alignment = Converted
@@ -724,7 +735,7 @@ Canvas
           Font Color = #8F8A78FF
           Font Size = 16.00
           Font Weight = Regular
-          Font Style = Normal
+          Font Style = Italic
           Horizontal Alignment = Center
           Vertical Alignment = Middle
           Text Alignment = Converted
@@ -816,7 +827,7 @@ Canvas
           Font Color = #8F8A78FF
           Font Size = 16.00
           Font Weight = Regular
-          Font Style = Normal
+          Font Style = Italic
           Horizontal Alignment = Center
           Vertical Alignment = Middle
           Text Alignment = Converted
@@ -908,7 +919,7 @@ Canvas
           Font Color = #8F8A78FF
           Font Size = 16.00
           Font Weight = Regular
-          Font Style = Normal
+          Font Style = Italic
           Horizontal Alignment = Center
           Vertical Alignment = Middle
           Text Alignment = Converted
@@ -921,6 +932,34 @@ Canvas
           Color = #C9A24BFF
           Sprite = card_string (Sprite)
           Type = Simple
+    MultiplierIndicator
+      [RT] pos=(0,0) size=(100x60) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
+      [TextMeshProUGUI]
+        Color = #FFFFFFFF
+        Text = "x2"
+        Font Color 32 = #E6EC84FF
+        Font Color = #E6EC84FF
+        Font Size = 48.00
+        Font Weight = Regular
+        Font Style = Bold
+        Horizontal Alignment = Left
+        Vertical Alignment = Top
+        Text Alignment = Converted
+        Character Horizontal Scale = 1.00
+        Parent Linked Component = <none>
+        Check Padding Required = False
+      [CanvasGroup]
+        Alpha = 1.00
+        Interactable = True
+        Blocks Raycasts = True
+        Ignore Parent Groups = False
+      [MultiplierIndicator]
+        Text = MultiplierIndicator (TextMeshProUGUI)
+        Canvas Group = MultiplierIndicator (CanvasGroup)
+        Y Offset = 130.00
+        Move Duration = 0.25
+        Show Duration = 0.20
+        Fade Duration = 0.15
   VoltageBar
     [RT] pos=(60,0) size=(80x400) anchor=(0.0,0.5)-(0.0,0.5) scale=(1.0,1.0,1.0)
     [VoltageBarUI]
@@ -962,8 +1001,6 @@ Canvas
       Blocks Raycasts = True
       Ignore Parent Groups = False
     [ComboWindowUI]
-      Slots Container = CW_Slots (RectTransform)
-      Slot Prefab = ComboSlot (GameObject)
       Canvas Group = <none>
       Inner Ring = InnerRing (RectTransform)
       Outer Ring = OuterRing (RectTransform)
@@ -971,18 +1008,6 @@ Canvas
       Outer Ring Image = OuterRing (Image)
       Charging Color = #FFFFFFFF
       Perfect Color = #FFFFFFFF
-    CW_Slots
-      [RT] pos=(0,-220) size=(580x80) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
-      [HorizontalLayoutGroup]
-        Child Alignment = Middle Center
-        Spacing = 10.00
-        Child Force Expand Width = False
-        Child Force Expand Height = False
-        Child Control Width = False
-        Child Control Height = False
-        Child Scale Width = False
-        Child Scale Height = False
-        Reverse Arrangement = False
     InnerRing
       [RT] pos=(0,0) size=(240x240) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
       [Image]
@@ -1093,20 +1118,47 @@ Canvas
             Character Horizontal Scale = 1.00
             Parent Linked Component = <none>
             Check Padding Required = False
-  EnemyDamageSpawn
-    [RT] pos=(-200,-150) size=(0x0) anchor=(1.0,1.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
-  PlayerDamageSpawn
-    [RT] pos=(200,-150) size=(0x0) anchor=(0.0,1.0)-(0.0,1.0) scale=(1.0,1.0,1.0)
   DamageNumberSpawner
     [RT] pos=(0,0) size=(100x100) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
     [DamageNumberSpawner]
       Prefab = DamageNumbers (DamageNumber)
-      Enemy Spawn Point = EnemyDamageSpawn (RectTransform)
-      Player Spawn Point = PlayerDamageSpawn (RectTransform)
+      Canvas Rect = Canvas (RectTransform)
+      World Camera = Main Camera (Camera)
+      Enemy Target = Enemy (Transform)
+      Player Target = Player (Transform)
+      Vertical World Offset = 1.50
       Normal Color = #FFFFFFFF
       Perfect Color = #FFD933FF
       Good Color = #B2E6FFFF
       Player Damage Color = #FF4C4CFF
+  StreakDebug
+    [RT] pos=(847,0) size=(200x50) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+    [TextMeshProUGUI]
+      Color = #FFFFFFFF
+      Text = "D 0"
+      Font Color 32 = #FFFFFFFF
+      Font Color = #FFFFFFFF
+      Font Size = 36.00
+      Font Weight = Regular
+      Font Style = Bold
+      Horizontal Alignment = Left
+      Vertical Alignment = Top
+      Text Alignment = Converted
+      Character Horizontal Scale = 1.00
+      Parent Linked Component = <none>
+      Check Padding Required = False
+  StatusIconDisplay
+    [RT] pos=(0,0) size=(100x100) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+    [StatusIconDisplay]
+      Enemy Target = Enemy (Transform)
+      Player Target = Player (Transform)
+      World Camera = Main Camera (Camera)
+      Canvas Rect = Canvas (RectTransform)
+      Vertical World Offset = 2.50
+      Icon Prefab = StatusIcon (GameObject)
+      Icon Horizontal Spacing = 55.00
+      Bleed Icon = <none>
+      Poison Icon = <none>
 EventSystem
   [EventSystem]
     First Selected = <none>

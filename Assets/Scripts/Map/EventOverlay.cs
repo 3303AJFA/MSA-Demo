@@ -57,9 +57,6 @@ public class EventOverlay : MonoBehaviour
 
     void FallbackToCombat(int poiID)
     {
-        if (MapManager.Instance != null)
-            MapManager.Instance.SaveToGameState();
-
         if (SceneFlow.Instance != null)
             SceneFlow.Instance.GoToBattle(poiID);
         else
@@ -105,7 +102,6 @@ public class EventOverlay : MonoBehaviour
         }
 
         panelRoot.SetActive(true);
-        MapManager.Instance.SetInputBlocked(true);
     }
 
     void OnChoicePicked(EventChoice choice)
@@ -140,6 +136,5 @@ public class EventOverlay : MonoBehaviour
         panelRoot.SetActive(false);
         outcomePanel.SetActive(false);
         descriptionText.gameObject.SetActive(true);
-        MapManager.Instance.SetInputBlocked(false);
     }
 }

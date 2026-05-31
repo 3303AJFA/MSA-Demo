@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Card_B
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: B
-  voltageCost: 1
+  hotkey: 33
+  cooldownBeats: 0.5
+  equippedPedal: {fileID: 0}
+  voltageCost: 20
   damage: 10
   effect: 0
   effectValue: 0
   effectDuration: 0
-  hotkey: 33
