@@ -1,4 +1,4 @@
-Scene: MapScene | 2026-05-30 02:38
+Scene: MapScene | 2026-06-06 03:47
 --------------------------------------------------
 Main Camera
   [T] pos=(0.0,10.0,-7.0) rot=(50,0,0) scale=(1.0,1.0,1.0)
@@ -25,19 +25,6 @@ Main Camera
     Stereo Convergence = 10.00
     Stereo Separation = 0.02
   [AudioListener]
-  [MapCameraController]
-    Target = Hero (Transform)
-    Distance = 10.00
-    Min Distance = 4.00
-    Max Distance = 20.00
-    Zoom Speed = 20.00
-    Horizontal Speed = 200.00
-    Vertical Speed = 120.00
-    Min Pitch = 15.00
-    Max Pitch = 80.00
-    Position Lerp = 8.00
-    Rotation Lerp = 12.00
-    Inertia Decay = 5.00
   [UniversalAdditionalCameraData]
     Render Shadows = True
     Requires Depth Texture Option = Use settings from Render Pipeline Asset
@@ -46,7 +33,7 @@ Main Camera
     Renderer Index = -1
     Volume Trigger = <none>
     Volume Framework Update Mode Option = Use Pipeline Settings
-    Render Post Processing = False
+    Render Post Processing = True
     Antialiasing = No Anti-aliasing
     Antialiasing Quality = High
     Stop Na N = False
@@ -62,34 +49,8 @@ Global Volume
     Blend Distance = 0.00
     Weight = 1.00
     Shared Profile = BattleVolumeProfile (VolumeProfile)
-Environment
-  [T] pos=(1.4,0.2,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
-POIs
-  [T] pos=(1.4,0.2,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
-  POI_01_Start
-    [T] pos=(-16.3,0.9,-10.7) rot=(0,0,0) scale=(1.0,0.2,1.0)
-    [PointOfInterest]
-      Poi ID = 1
-      Is Fixed = True
-      Fixed Type = Story
-      Spawn Chance = 1.00
-      Chance Empty = 0.00
-      Chance Combat = 0.00
-      Chance Event = 0.00
-      Chance Merchant = 0.00
-      Chance Friend = 0.00
-      Icon Quad = <none>
-      Icon Combat = <none>
-      Icon Story = <none>
-      Icon Event = <none>
-      Icon Merchant = <none>
-      Icon Boss = <none>
-      Icon Friend = <none>
-      Icon Empty = <none>
-    Icon
-      [T] pos=(0.0,0.2,0.0) rot=(90,0,0) scale=(0.7,0.7,1.0)
 Canvas
-  [RT] pos=(784,423) size=(1962x1057) anchor=(0.0,0.0)-(0.0,0.0) scale=(0.8,0.8,0.8)
+  [RT] pos=(785,423) size=(1961x1057) anchor=(0.0,0.0)-(0.0,0.0) scale=(0.8,0.8,0.8)
   [Canvas]
     Render Mode = Screen Space - Overlay
     Camera = <none>
@@ -128,7 +89,7 @@ Canvas
     Outcome Image = OutcomeImage (Image)
     Outcome Text = OutcomeText (TextMeshProUGUI)
     Continue Button = ContinueButton (Button)
-    Event Database = EventDatabase_Main (EventDatabase)
+    Event Database = <none>
     Current Act = Act 1_City
   EventPanel [OFF]
     [RT] pos=(0,0) size=(0x0) anchor=(0.0,0.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
@@ -323,23 +284,74 @@ Canvas
               Character Horizontal Scale = 1.00
               Parent Linked Component = <none>
               Check Padding Required = False
-MapManager
-  [MapManager]
-    Hero = Hero (HeroFigure)
-    Starting POI = POI_01_Start (PointOfInterest)
-    Regenerate After Visits = 5
+  DialogueLog
+    [RT] pos=(0,0) size=(0x0) anchor=(0.7,0.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+    [CanvasGroup]
+      Alpha = 1.00
+      Interactable = True
+      Blocks Raycasts = True
+      Ignore Parent Groups = False
+    [MSADialogueView]
+      Root Canvas Group = DialogueLog (CanvasGroup)
+      Background Image = Background (Image)
+      Lines Container = LinesContainer (RectTransform)
+      Choices Container = ChoicesContainer (RectTransform)
+      Line Prefab = Line (GameObject)
+      Choice Button Prefab = ChoiceButton (GameObject)
+      Past Line Alpha = 0.40
+      Line Fade Duration = 0.25
+      Choice Color = #C9A34AFF
+      Panel Fade Duration = 0.30
+    Background
+      [RT] pos=(0,0) size=(0x0) anchor=(0.0,0.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+      [Image]
+        Color = #0A0E0AB4
+        Sprite = <none>
+        Type = Simple
+    LinesContainer
+      [RT] pos=(0,140) size=(-40x-320) anchor=(0.0,0.0)-(1.0,1.0) scale=(1.0,1.0,1.0)
+      [VerticalLayoutGroup]
+        Child Alignment = Lower Center
+        Spacing = 12.00
+        Child Force Expand Width = True
+        Child Force Expand Height = False
+        Child Control Width = True
+        Child Control Height = True
+        Child Scale Width = False
+        Child Scale Height = False
+        Reverse Arrangement = False
+    ChoicesContainer
+      [RT] pos=(0,20) size=(-40x280) anchor=(0.0,0.0)-(1.0,0.0) scale=(1.0,1.0,1.0)
+      [VerticalLayoutGroup]
+        Child Alignment = Lower Center
+        Spacing = 8.00
+        Child Force Expand Width = True
+        Child Force Expand Height = False
+        Child Control Width = False
+        Child Control Height = False
+        Child Scale Width = False
+        Child Scale Height = False
+        Reverse Arrangement = False
+  DialogueRunner
+    [RT] pos=(0,0) size=(100x100) anchor=(0.5,0.5)-(0.5,0.5) scale=(1.0,1.0,1.0)
+    [DialogueRunner]
+      Yarn Project = Project (YarnProject)
+      Variable Storage = DialogueRunner (MSAVariableStorage)
+      Line Provider = <none>
+      Saliency Strategy = Random Best Least Recently Viewed
+      Verbose Logging = False
+      Auto Start = False
+      Start Node = "Start"
+      Run Selected Option As Line = False
+      Allow Option Fallthrough = True
+    [MSAVariableStorage]
 GameState
   [GameState]
-    Current POI_ID = -1
-    Visit Count = 0
-    Pending POI_ID = -1
 SceneFlow
   [T] pos=(0.2,0.2,-0.4) rot=(0,0,0) scale=(1.0,1.0,1.0)
   [SceneFlow]
-Hero
-  [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(0.4,0.4,0.4)
-  [HeroFigure]
-    Move Speed = 3.00
+    Battle Scene Name = "BattleScene"
+    Map Scene Name = "MapScene"
 Directional Light
   [T] pos=(0.0,3.0,0.0) rot=(40,330,0) scale=(1.0,1.0,1.0)
   [Light]
@@ -374,3 +386,223 @@ EventSystem
     Scroll Delta Per Tick = 6.00
 MapBoard
   [T] pos=(0.0,0.0,0.0) rot=(270,0,0) scale=(1.0,1.0,1.0)
+Player
+  [T] pos=(0.0,1.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+  [CharacterController]
+    Layer Override Priority = 0
+    Provides Contacts = False
+    Height = 2.00
+    Radius = 0.50
+    Slope Limit = 45.00
+    Step Offset = 0.30
+    Skin Width = 0.08
+    Min Move Distance = 0.00
+  [PlayerController]
+    Max Speed = 10.00
+    Acceleration = 15.00
+    Deceleration = 25.00
+    Turn Deceleration = 45.00
+    Turn Speed Moving = 8.00
+    Turn Speed Stationary = 14.00
+    Gravity = -9.81
+    Camera Reference = Main Camera (Transform)
+    Animator = Player (Animator)
+    Speed Param Name = "Speed"
+    Playing Param Name = "Playing"
+    Guitar Hold Key = Left Alt
+  [Animator]
+    Avatar = <none>
+    Controller = Player_AC (AnimatorController)
+    Culling Mode = Always Animate
+    Update Mode = Normal
+    Apply Root Motion = False
+    Linear Velocity Blending = False
+    Stabilize Feet = False
+    Animate Physics = False
+    Has Transform Hierarchy = True
+    Allow Constant Clip Sampling Optimization = True
+    Keep Animator State On Disable = False
+    Write Default Values On Disable = False
+  [WallDissolveController]
+    Camera Reference = Main Camera (Camera)
+    Raycast Interval = 1
+    Transition Duration = 0.30
+    Size Property Name = "_Size"
+    Position Property Name = "_Position"
+  Beta_Joints
+    [SkinnedMeshRenderer]
+      Ray Tracing Accel Struct Build Flags Override = False
+      Ray Tracing Accel Struct Build Flags = 1
+      Small Mesh Culling = True
+      Force Mesh Lod = -1
+      Mesh Lod Selection Bias = 0.00
+      Probe Anchor = <none>
+      Light Probe Volume Override = <none>
+      Mask Interaction = None
+      Quality = Auto
+      Update When Offscreen = False
+      Skinned Motion Vectors = True
+      Mesh = Beta_Joints (Mesh)
+      Root Bone = mixamorig:Hips (Transform)
+  Beta_Surface
+    [SkinnedMeshRenderer]
+      Ray Tracing Accel Struct Build Flags Override = False
+      Ray Tracing Accel Struct Build Flags = 1
+      Small Mesh Culling = True
+      Force Mesh Lod = -1
+      Mesh Lod Selection Bias = 0.00
+      Probe Anchor = <none>
+      Light Probe Volume Override = <none>
+      Mask Interaction = None
+      Quality = Auto
+      Update When Offscreen = False
+      Skinned Motion Vectors = True
+      Mesh = Beta_Surface (Mesh)
+      Root Bone = mixamorig:Hips (Transform)
+  mixamorig:Hips
+    [T] pos=(0.0,1.0,0.0) rot=(1,0,0) scale=(1.0,1.0,1.0)
+    mixamorig:LeftUpLeg
+      [T] pos=(-0.1,-0.1,0.0) rot=(359,0,180) scale=(1.0,1.0,1.0)
+      mixamorig:LeftLeg
+        [T] pos=(0.0,0.4,0.0) rot=(355,0,0) scale=(1.0,1.0,1.0)
+        mixamorig:LeftFoot
+          [T] pos=(0.0,0.4,0.0) rot=(55,0,0) scale=(1.0,1.0,1.0)
+          mixamorig:LeftToeBase
+            [T] pos=(0.0,0.1,0.0) rot=(39,0,0) scale=(1.0,1.0,1.0)
+            mixamorig:LeftToe_End
+              [T] pos=(0.0,0.1,0.0) rot=(0,1,0) scale=(1.0,1.0,1.0)
+    mixamorig:RightUpLeg
+      [T] pos=(0.1,-0.1,0.0) rot=(359,0,180) scale=(1.0,1.0,1.0)
+      mixamorig:RightLeg
+        [T] pos=(0.0,0.4,0.0) rot=(355,0,0) scale=(1.0,1.0,1.0)
+        mixamorig:RightFoot
+          [T] pos=(0.0,0.4,0.0) rot=(55,0,0) scale=(1.0,1.0,1.0)
+          mixamorig:RightToeBase
+            [T] pos=(0.0,0.1,0.0) rot=(39,0,0) scale=(1.0,1.0,1.0)
+            mixamorig:RightToe_End
+              [T] pos=(0.0,0.1,0.0) rot=(0,359,0) scale=(1.0,1.0,1.0)
+    mixamorig:Spine
+      [T] pos=(0.0,0.1,0.0) rot=(351,0,0) scale=(1.0,1.0,1.0)
+      mixamorig:Spine1
+        [T] pos=(0.0,0.1,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+        mixamorig:Spine2
+          [T] pos=(0.0,0.1,0.0) rot=(1,0,0) scale=(1.0,1.0,1.0)
+          mixamorig:LeftShoulder
+            [T] pos=(0.0,0.1,0.0) rot=(82,158,260) scale=(1.0,1.0,1.0)
+            mixamorig:LeftArm
+              [T] pos=(0.0,0.1,0.0) rot=(357,1,348) scale=(1.0,1.0,1.0)
+              mixamorig:LeftForeArm
+                [T] pos=(0.0,0.3,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                mixamorig:LeftHand
+                  [T] pos=(0.0,0.3,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                  mixamorig:LeftHandIndex1
+                    [T] pos=(0.0,0.1,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                    mixamorig:LeftHandIndex2
+                      [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                      mixamorig:LeftHandIndex3
+                        [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                        mixamorig:LeftHandIndex4
+                          [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                  mixamorig:LeftHandMiddle1
+                    [T] pos=(0.0,0.1,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                    mixamorig:LeftHandMiddle2
+                      [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                      mixamorig:LeftHandMiddle3
+                        [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                        mixamorig:LeftHandMiddle4
+                          [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                  mixamorig:LeftHandPinky1
+                    [T] pos=(0.0,0.1,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                    mixamorig:LeftHandPinky2
+                      [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                      mixamorig:LeftHandPinky3
+                        [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                        mixamorig:LeftHandPinky4
+                          [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                  mixamorig:LeftHandRing1
+                    [T] pos=(0.0,0.1,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                    mixamorig:LeftHandRing2
+                      [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                      mixamorig:LeftHandRing3
+                        [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                        mixamorig:LeftHandRing4
+                          [T] pos=(0.0,0.0,0.0) rot=(0,360,0) scale=(1.0,1.0,1.0)
+                  mixamorig:LeftHandThumb1
+                    [T] pos=(0.0,0.0,0.0) rot=(30,0,333) scale=(1.0,1.0,1.0)
+                    mixamorig:LeftHandThumb2
+                      [T] pos=(0.0,0.0,0.0) rot=(0,360,0) scale=(1.0,1.0,1.0)
+                      mixamorig:LeftHandThumb3
+                        [T] pos=(0.0,0.0,0.0) rot=(0,360,0) scale=(1.0,1.0,1.0)
+                        mixamorig:LeftHandThumb4
+                          [T] pos=(0.0,0.0,0.0) rot=(0,346,355) scale=(1.0,1.0,1.0)
+          mixamorig:Neck
+            [T] pos=(0.0,0.2,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+            mixamorig:Head
+              [T] pos=(0.0,0.1,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+              mixamorig:HeadTop_End
+                [T] pos=(0.0,0.2,0.1) rot=(0,0,0) scale=(1.0,1.0,1.0)
+          mixamorig:RightShoulder
+            [T] pos=(0.0,0.1,0.0) rot=(82,202,100) scale=(1.0,1.0,1.0)
+            mixamorig:RightArm
+              [T] pos=(0.0,0.1,0.0) rot=(357,359,12) scale=(1.0,1.0,1.0)
+              mixamorig:RightForeArm
+                [T] pos=(0.0,0.3,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                mixamorig:RightHand
+                  [T] pos=(0.0,0.3,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                  mixamorig:RightHandIndex1
+                    [T] pos=(0.0,0.1,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                    mixamorig:RightHandIndex2
+                      [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                      mixamorig:RightHandIndex3
+                        [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                        mixamorig:RightHandIndex4
+                          [T] pos=(0.0,0.0,0.0) rot=(0,360,360) scale=(1.0,1.0,1.0)
+                  mixamorig:RightHandMiddle1
+                    [T] pos=(0.0,0.1,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                    mixamorig:RightHandMiddle2
+                      [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                      mixamorig:RightHandMiddle3
+                        [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                        mixamorig:RightHandMiddle4
+                          [T] pos=(0.0,0.0,0.0) rot=(0,360,360) scale=(1.0,1.0,1.0)
+                  mixamorig:RightHandPinky1
+                    [T] pos=(0.0,0.1,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                    mixamorig:RightHandPinky2
+                      [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                      mixamorig:RightHandPinky3
+                        [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                        mixamorig:RightHandPinky4
+                          [T] pos=(0.0,0.0,0.0) rot=(0,360,0) scale=(1.0,1.0,1.0)
+                  mixamorig:RightHandRing1
+                    [T] pos=(0.0,0.1,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                    mixamorig:RightHandRing2
+                      [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                      mixamorig:RightHandRing3
+                        [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                        mixamorig:RightHandRing4
+                          [T] pos=(0.0,0.0,0.0) rot=(0,360,0) scale=(1.0,1.0,1.0)
+                  mixamorig:RightHandThumb1
+                    [T] pos=(0.0,0.0,0.0) rot=(30,360,27) scale=(1.0,1.0,1.0)
+                    mixamorig:RightHandThumb2
+                      [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                      mixamorig:RightHandThumb3
+                        [T] pos=(0.0,0.0,0.0) rot=(0,0,0) scale=(1.0,1.0,1.0)
+                        mixamorig:RightHandThumb4
+                          [T] pos=(0.0,0.0,0.0) rot=(0,14,6) scale=(1.0,1.0,1.0)
+AudioSystem
+  [T] pos=(-5.8,1.0,-3.4) rot=(0,0,0) scale=(1.0,1.0,1.0)
+  [AudioSystem]
+    Note E_Low = E_Low (AudioClip)
+    Note A = A (AudioClip)
+    Note D = D (AudioClip)
+    Note G = G (AudioClip)
+    Note B = B (AudioClip)
+    Note E_High = E_High (AudioClip)
+    Pick Sound = Pick (AudioClip)
+    Chord Humanize Offset = 0.01
+DialogueTesttrigger
+  [T] pos=(34.7,7.9,10.8) rot=(0,0,0) scale=(1.0,1.0,1.0)
+  [DialogueTestTrigger]
+    Runner = <none>
+    Start Node = "Start"
+    Trigger Key = F

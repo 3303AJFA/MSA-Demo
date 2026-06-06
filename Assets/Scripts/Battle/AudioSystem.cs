@@ -45,6 +45,27 @@ public class AudioSystem : MonoBehaviour
         Destroy(source, 1f);
     }
 
+    /// <summary>
+    /// Одиночная нота струны. Индексы 0..5 соответствуют клавишам Q/W/E/A/S/D:
+    /// 0=E_Low (Q), 1=A (W), 2=D (E), 3=G (A), 4=B (S), 5=E_High (D).
+    /// Без боевой обработки — просто звук. Используется гитарным режимом в MapScene.
+    /// </summary>
+    public void PlayNote(int stringIndex)
+    {
+        AudioClip clip = stringIndex switch
+        {
+            0 => noteE_Low,
+            1 => noteA,
+            2 => noteD,
+            3 => noteG,
+            4 => noteB,
+            5 => noteE_High,
+            _ => null
+        };
+        if (clip == null) return;
+        audioSources[stringIndex % audioSources.Count].PlayOneShot(clip);
+    }
+
     // Вызывается при срабатывании комбо
     public void PlayCombo(List<CardData> cards)
     {

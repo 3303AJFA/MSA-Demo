@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91646d7f7334731458826eac7328663f, type: 3}
-  m_Name: EventDatabase_Main
-  m_EditorClassIdentifier: Assembly-CSharp::EventDatabase
-  allEvents:
-  - {fileID: 11400000, guid: fd661a3b9e7794b429bff3ebb28a29b9, type: 2}
+  m_Script: {fileID: 11500000, guid: 56e1a71088fb5f4468369d633de008d7, type: 3}
+  m_Name: Speaker_Vivus
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSpeaker
+  displayName: Vivus
+  color: {r: 0.8666667, g: 0.8235294, b: 0.73333335, a: 1}

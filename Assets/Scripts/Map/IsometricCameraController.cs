@@ -7,43 +7,62 @@ public class IsometricCameraController : MonoBehaviour
     public Transform target;
 
     [Header("Iso Angles")]
-    [Tooltip("Угол наклона камеры вниз (изометрический наклон). Типично 30-45°.")]
+    [Tooltip("Угол наклона камеры вниз (изометрический). Фиксированный, не меняется в плеймоде.")]
     [Range(15f, 75f)] public float pitch = 40f;
 
-    [Tooltip("Начальный yaw (поворот вокруг персонажа)")]
+    [Tooltip("Начальный yaw — поворот вокруг персонажа на старте")]
     public float initialYaw = 45f;
-
-    [Tooltip("Шаг поворота при нажатии Q/E (градусов)")]
-    public float rotateStep = 90f;
 
     [Header("Distance")]
     public float distance = 10f;
 
-    [Header("Smoothing")]
-    [Tooltip("Скорость доводки поворота к целевому yaw")]
-    public float rotateLerpSpeed = 8f;
+    [Header("Rotation (Q/E hold)")]
+    [Tooltip("Угловая скорость поворота при ЗАЖАТИИ Q/E (градусов/сек)")]
+    public float rotateSpeed = 120f;
 
-    [Tooltip("Скорость следования камеры за персонажем")]
+    [Tooltip("Мягкость старта/остановки вращения. 0 = мгновенно дёрнулось. Выше = плавнее старт/затухание.")]
+    [Range(0f, 20f)] public float rotationDamping = 6f;
+
+    [Header("Follow")]
+    [Tooltip("Скорость доводки позиции камеры за target (Lerp). Выше = жёстче следует.")]
     public float followSpeed = 10f;
 
     private float currentYaw;
-    private float targetYaw;
+    private float angularVelocity;
 
     void Start()
     {
         currentYaw = initialYaw;
-        targetYaw = initialYaw;
+        angularVelocity = 0f;
     }
 
     void Update()
     {
+        UpdateYawFromInput();
+    }
+
+    void UpdateYawFromInput()
+    {
         var kb = Keyboard.current;
-        if (kb != null)
+        if (kb == null) return;
+
+        float targetAngularVel = 0f;
+        if (kb.qKey.isPressed) targetAngularVel -= rotateSpeed;
+        if (kb.eKey.isPressed) targetAngularVel += rotateSpeed;
+
+        // Демпфирование: angularVelocity плавно стремится к target.
+        // При rotationDamping = 0 — мгновенный набор/останов.
+        if (rotationDamping > 0f)
         {
-            if (kb.qKey.wasPressedThisFrame) targetYaw -= rotateStep;
-            if (kb.eKey.wasPressedThisFrame) targetYaw += rotateStep;
+            float t = 1f - Mathf.Exp(-rotationDamping * Time.deltaTime);
+            angularVelocity = Mathf.Lerp(angularVelocity, targetAngularVel, t);
         }
-        currentYaw = Mathf.LerpAngle(currentYaw, targetYaw, rotateLerpSpeed * Time.deltaTime);
+        else
+        {
+            angularVelocity = targetAngularVel;
+        }
+
+        currentYaw += angularVelocity * Time.deltaTime;
     }
 
     void LateUpdate()
@@ -56,7 +75,7 @@ public class IsometricCameraController : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, desiredPos, followSpeed * Time.deltaTime);
 
-        Vector3 lookDir = (target.position - transform.position);
+        Vector3 lookDir = target.position - transform.position;
         if (lookDir.sqrMagnitude > 0.0001f)
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDir, Vector3.up), followSpeed * Time.deltaTime);
     }
